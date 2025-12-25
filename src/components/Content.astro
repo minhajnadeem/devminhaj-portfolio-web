@@ -1,0 +1,174 @@
+---
+interface Props {
+	testimonials?: Array<{ category: string; quote: string; author: string; link?: string }>;
+}
+
+const { testimonials } = Astro.props;
+
+// Default testimonials if none provided
+const defaultTestimonials = [
+	{
+		category: 'Technical Mastery & Innovation',
+		quote: 'Minhaj is a standout professional in the mobile development space. Having collaborated with him since 2020, I can confidently say he is an expert in both Kotlin and Flutter. Whether delivering as a solo developer or contributing to a team, he consistently produces exceptional results. He is my go-to person for any mobile product, and I highly recommend him for his ongoing support and technical excellence.',
+		author: 'Yahya K.',
+		link: '#'
+	},
+	{
+		category: 'Architectural Excellence & Strategic Logic',
+		quote: 'I strongly endorse Minhaj for any Senior Mobile Engineer or Consultant role. His proficiency in Flutter and Android development is exceptional, particularly regarding scalability and code optimization. Minhaj excels at architecting maintainable codebases and translating complex business logic into functional mobile solutions. His ability to lead client communications and ensure seamless project delivery makes him an indispensable asset to any high-growth team.',
+		author: 'Zaheer-ud-din Baber',
+		link: '#'
+	},
+	{
+		category: 'Quality & Collaborative Leadership',
+		quote: 'Minhaj is a highly skilled Senior Android Developer whose deep understanding of mobile technologies is matched only by his commitment to quality. His proficiency in coding and systematic problem-solving ensures successful project outcomes every time. Beyond his technical talent, his collaborative approach makes him a valuable addition to any professional engineering team.',
+		author: 'Muhammad Junaid Ijaz',
+		link: '#'
+	}
+];
+
+const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials : defaultTestimonials;
+
+// LinkedIn recommendations URL
+const linkedInRecommendationsUrl = 'https://www.linkedin.com/in/minhaj-nadeem/details/recommendations/?detailScreenTabIndex=0';
+---
+
+<section class="content-section">
+	<div class="content-container">
+		<div class="section-header">
+			<h2 class="section-title">What People Says About Me</h2>
+		</div>
+		<div class="content-grid">
+			{displayTestimonials.map((testimonial) => (
+				<a href={linkedInRecommendationsUrl} target="_blank" rel="noopener noreferrer" class="content-card">
+					<div class="testimonial-category">{testimonial.category}</div>
+					<blockquote class="testimonial-quote">"{testimonial.quote}"</blockquote>
+					<div class="testimonial-author">
+						— {testimonial.author} | View LinkedIn Profile
+					</div>
+				</a>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.content-section {
+		padding: 6rem 2rem;
+		background: #f7f0f0;
+	}
+
+	.content-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.section-title {
+		font-size: 2.75rem;
+		font-weight: 800;
+		color: #1b3956;
+		margin: 0 0 1rem 0;
+		letter-spacing: -0.02em;
+	}
+
+	.section-subtitle {
+		font-size: 1.125rem;
+		color: #1b3956;
+		margin: 0;
+		opacity: 0.7;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+	}
+
+	.content-card {
+		background: #f7f0f0;
+		padding: 2.5rem;
+		border-radius: 12px;
+		border: 1px solid rgba(27, 57, 86, 0.1);
+		transition: all 0.3s ease;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+	}
+
+	.content-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 30px rgba(27, 57, 86, 0.15);
+		border-color: #2f9983;
+	}
+
+	.testimonial-category {
+		font-size: 0.875rem;
+		color: #2f9983;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: 1rem;
+	}
+
+	.testimonial-quote {
+		font-size: 1rem;
+		color: #1b3956;
+		line-height: 1.7;
+		margin: 0 0 1.5rem 0;
+		flex-grow: 1;
+		font-style: italic;
+	}
+
+	.testimonial-author {
+		font-size: 0.9375rem;
+		color: #1b3956;
+		font-weight: 600;
+		margin-top: auto;
+	}
+
+	.testimonial-author::after {
+		content: " →";
+		color: #2f9983;
+		margin-left: 0.25rem;
+		transition: transform 0.3s ease;
+		display: inline-block;
+	}
+
+	.content-card:hover .testimonial-author::after {
+		transform: translateX(4px);
+	}
+
+	@media (max-width: 968px) {
+		.content-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1.5rem;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.content-section {
+			padding: 4rem 1rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.content-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.content-card {
+			padding: 2rem;
+		}
+	}
+</style>
+

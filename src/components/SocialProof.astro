@@ -1,0 +1,203 @@
+---
+interface Props {
+	testimonials?: Array<{ quote: string; author: string; role: string }>;
+	trustedBy?: Array<{ name: string; url: string }>;
+}
+
+const { testimonials = [], trustedBy = [] } = Astro.props;
+
+// Default companies from social-proof.md
+const defaultTrustedBy = [
+	{ name: 'Devcrew I/O', url: 'https://devcrew.io' },
+	{ name: 'Twidlee', url: 'https://twidlee.com' },
+	{ name: 'Emblem Technologies', url: 'https://emblemtechnologies.com' },
+	{ name: 'Pimenta Group', url: 'https://pimenta.group' },
+	{ name: 'Toptech', url: 'https://toptech.team' },
+	{ name: 'iBuildSoft', url: 'https://ibuildsoft.com' }
+];
+const displayTrustedBy = trustedBy.length > 0 ? trustedBy : defaultTrustedBy;
+---
+
+<section class="social-proof">
+	<div class="social-proof-container">
+		{displayTrustedBy.length > 0 && (
+			<div class="trusted-by">
+				<p class="trusted-by-label">Trusted By</p>
+				<div class="marquee-wrapper">
+					<div class="marquee-content">
+						{displayTrustedBy.map((company) => (
+							<a href={company.url} target="_blank" rel="noopener noreferrer" class="company-item">
+								{company.name}
+							</a>
+						))}
+						{displayTrustedBy.map((company) => (
+							<a href={company.url} target="_blank" rel="noopener noreferrer" class="company-item">
+								{company.name}
+							</a>
+						))}
+					</div>
+				</div>
+			</div>
+		)}
+		{testimonials.length > 0 && (
+			<div class="testimonials">
+				{testimonials.map((testimonial) => (
+					<div class="testimonial-card">
+						<p class="testimonial-quote">"{testimonial.quote}"</p>
+						<div class="testimonial-author">
+							<strong>{testimonial.author}</strong>
+							<span>{testimonial.role}</span>
+						</div>
+					</div>
+				))}
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.social-proof {
+		padding: 4rem 2rem;
+		background: #f7f0f0;
+		border-top: 1px solid rgba(27, 57, 86, 0.1);
+		border-bottom: 1px solid rgba(27, 57, 86, 0.1);
+	}
+
+	.social-proof-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.trusted-by {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.trusted-by-label {
+		font-size: 0.875rem;
+		color: #1b3956;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin-bottom: 2rem;
+		font-weight: 600;
+		opacity: 0.7;
+	}
+
+	.marquee-wrapper {
+		overflow: hidden;
+		width: 100%;
+		position: relative;
+		mask-image: linear-gradient(
+			to right,
+			transparent,
+			black 10%,
+			black 90%,
+			transparent
+		);
+		-webkit-mask-image: linear-gradient(
+			to right,
+			transparent,
+			black 10%,
+			black 90%,
+			transparent
+		);
+	}
+
+	.marquee-content {
+		display: flex;
+		align-items: center;
+		gap: 3rem;
+		width: fit-content;
+		animation: marquee 30s linear infinite;
+	}
+
+	@keyframes marquee {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	.company-item {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: #1b3956;
+		padding: 0.75rem 1.5rem;
+		background: #f7f0f0;
+		border-radius: 6px;
+		border: 1px solid rgba(27, 57, 86, 0.2);
+		text-decoration: none;
+		transition: all 0.3s ease;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+
+	.company-item:hover {
+		background: #1b3956;
+		color: #f7f0f0;
+		border-color: #1b3956;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(27, 57, 86, 0.2);
+	}
+
+	.testimonials {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.testimonial-card {
+		padding: 2rem;
+		background: #f7f0f0;
+		border-radius: 8px;
+		border-left: 4px solid #2f9983;
+	}
+
+	.testimonial-quote {
+		font-size: 1.125rem;
+		line-height: 1.7;
+		color: #1b3956;
+		margin: 0 0 1.5rem 0;
+		font-style: italic;
+		opacity: 0.85;
+	}
+
+	.testimonial-author {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.testimonial-author strong {
+		color: #1b3956;
+		font-size: 1rem;
+	}
+
+	.testimonial-author span {
+		color: #1b3956;
+		font-size: 0.875rem;
+		opacity: 0.7;
+	}
+
+	@media (max-width: 640px) {
+		.social-proof {
+			padding: 3rem 1rem;
+		}
+
+		.marquee-content {
+			gap: 1.5rem;
+		}
+
+		.company-item {
+			font-size: 1rem;
+			padding: 0.5rem 1rem;
+		}
+
+		.testimonials {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+

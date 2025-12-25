@@ -1,0 +1,125 @@
+---
+interface Props {
+	skills: Array<{ category: string; technologies: string }>;
+}
+
+const { skills } = Astro.props;
+---
+
+<section class="technical" id="technical">
+	<div class="technical-container">
+		<div class="section-header">
+			<div class="section-subtitle">Technical Arsenal</div>
+			<h2 class="section-title">My technical expertise</h2>
+		</div>
+		<div class="skills-grid">
+			{skills.map((skill) => (
+				<div class="skill-card">
+					<div class="skill-icon">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+						</svg>
+					</div>
+					<h3 class="skill-category">{skill.category}</h3>
+					<p class="skill-technologies">{skill.technologies}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.technical {
+		padding: 6rem 2rem;
+		background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+	}
+
+	.technical-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.section-subtitle {
+		font-size: 0.875rem;
+		color: #6366f1;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: 0.5rem;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: #111827;
+		margin: 0;
+	}
+
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+	}
+
+	.skill-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 12px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+		border: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.skill-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
+		border-color: #6366f1;
+	}
+
+	.skill-icon {
+		width: 56px;
+		height: 56px;
+		background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #6366f1;
+		margin-bottom: 1.5rem;
+	}
+
+	.skill-category {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: #111827;
+		margin: 0 0 0.75rem 0;
+	}
+
+	.skill-technologies {
+		font-size: 1rem;
+		color: #6b7280;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	@media (max-width: 640px) {
+		.technical {
+			padding: 4rem 1rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.skills-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+	}
+</style>
+

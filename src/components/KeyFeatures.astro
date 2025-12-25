@@ -1,0 +1,137 @@
+---
+interface Props {
+	features: Array<{ title: string; description: string; icon?: string }>;
+}
+
+const { features } = Astro.props;
+---
+
+<section class="key-features" id="services">
+	<div class="key-features-container">
+		<div class="section-header">
+			<h2 class="section-title">What I Offer</h2>
+			<p class="section-subtitle">The most important things you need to know about my services</p>
+		</div>
+		<div class="features-grid">
+			{features.map((feature) => (
+				<div class="feature-card">
+					{feature.icon && (
+						<div class="feature-icon">
+							<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+							</svg>
+						</div>
+					)}
+					<h3 class="feature-title">{feature.title}</h3>
+					<p class="feature-description">{feature.description}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.key-features {
+		padding: 6rem 2rem;
+		background: #f7f0f0;
+	}
+
+	.key-features-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.section-title {
+		font-size: 2.75rem;
+		font-weight: 800;
+		color: #1b3956;
+		margin: 0 0 1rem 0;
+		letter-spacing: -0.02em;
+	}
+
+	.section-subtitle {
+		font-size: 1.125rem;
+		color: #1b3956;
+		margin: 0;
+		opacity: 0.7;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2.5rem;
+	}
+
+	.feature-card {
+		padding: 2.5rem;
+		background: #f7f0f0;
+		border-radius: 12px;
+		border: 1px solid rgba(27, 57, 86, 0.1);
+		transition: all 0.3s ease;
+	}
+
+	.feature-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 30px rgba(27, 57, 86, 0.15);
+		border-color: #2f9983;
+	}
+
+	.feature-icon {
+		width: 56px;
+		height: 56px;
+		background: #2f9983;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #f7f0f0;
+		margin-bottom: 1.5rem;
+	}
+
+	.feature-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #1b3956;
+		margin: 0 0 1rem 0;
+	}
+
+	.feature-description {
+		font-size: 1rem;
+		color: #1b3956;
+		line-height: 1.7;
+		margin: 0;
+		opacity: 0.8;
+	}
+
+	@media (max-width: 968px) {
+		.features-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.key-features {
+			padding: 4rem 1rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.features-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.feature-card {
+			padding: 2rem;
+		}
+	}
+</style>
+

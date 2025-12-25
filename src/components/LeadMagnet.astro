@@ -1,0 +1,131 @@
+---
+interface Props {
+	title: string;
+	subtitle: string;
+	ctaText: string;
+	ctaLink?: string;
+	imageUrl?: string;
+}
+
+const { title, subtitle, ctaText, ctaLink = "#contact", imageUrl } = Astro.props;
+---
+
+<section class="lead-magnet">
+	<div class="lead-magnet-container">
+		<div class="lead-magnet-content">
+			<h2 class="lead-magnet-title">{title}</h2>
+			<p class="lead-magnet-subtitle">{subtitle}</p>
+			<a href={ctaLink} class="cta-button" download target="_blank" rel="noopener noreferrer">
+				{ctaText}
+			</a>
+		</div>
+		<div class="lead-magnet-visual">
+			<div class="visual-icon">
+				<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+					<polyline points="14 2 14 8 20 8"></polyline>
+					<line x1="16" y1="13" x2="8" y2="13"></line>
+					<line x1="16" y1="17" x2="8" y2="17"></line>
+				</svg>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.lead-magnet {
+		padding: 6rem 2rem;
+		background: #f7f0f0;
+	}
+
+	.lead-magnet-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: 5rem;
+		align-items: center;
+	}
+
+	.lead-magnet-content {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.lead-magnet-title {
+		font-size: 3rem;
+		font-weight: 700;
+		color: #1b3956;
+		line-height: 1.2;
+		margin: 0;
+	}
+
+	.lead-magnet-subtitle {
+		font-size: 1.125rem;
+		color: #1b3956;
+		line-height: 1.7;
+		margin: 0;
+		opacity: 0.7;
+	}
+
+	.cta-button {
+		display: inline-block;
+		padding: 1rem 2.5rem;
+		background: #2f9983;
+		color: #f7f0f0;
+		text-decoration: none;
+		border-radius: 6px;
+		font-weight: 600;
+		font-size: 1rem;
+		transition: background 0.2s ease;
+		width: fit-content;
+		margin-top: 0.5rem;
+	}
+
+	.cta-button:hover {
+		background: #257a68;
+	}
+
+	.lead-magnet-visual {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.visual-icon {
+		color: #1b3956;
+		opacity: 0.15;
+	}
+
+	@media (max-width: 968px) {
+		.lead-magnet-container {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+
+		.lead-magnet-visual {
+			order: -1;
+		}
+
+		.lead-magnet-title {
+			font-size: 2.5rem;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.lead-magnet {
+			padding: 4rem 1rem;
+		}
+
+		.lead-magnet-title {
+			font-size: 2rem;
+		}
+
+		.cta-button {
+			width: 100%;
+			text-align: center;
+		}
+	}
+</style>
+
