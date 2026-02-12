@@ -2,6 +2,8 @@
 interface App {
 	name: string;
 	url: string;
+	subtitle?: string;
+	actionText?: string;
 }
 
 interface Props {
@@ -36,9 +38,9 @@ const {
 						</svg>
 					</div>
 					<h3 class="portfolio-card-title">{app.name}</h3>
-					<p class="portfolio-card-subtitle">Available on Google Play</p>
+					<p class="portfolio-card-subtitle">{app.subtitle ?? "Available on Google Play"}</p>
 					<div class="portfolio-card-action">
-						<span>View on Play Store</span>
+						<span>{app.actionText ?? "View on Play Store"}</span>
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<line x1="5" y1="12" x2="19" y2="12"></line>
 							<polyline points="12 5 19 12 12 19"></polyline>
