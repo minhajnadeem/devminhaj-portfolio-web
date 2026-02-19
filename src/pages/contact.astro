@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import ScrollToBottom from '../components/ScrollToBottom.astro';
+import FloatingFollowBar from '../components/FloatingFollowBar.astro';
 
 // Contact content from contact.md
 const heroHeading = "Let's Build Something Exceptional";
@@ -112,6 +113,7 @@ const socialLinks = {
 		</style>
 	</head>
 	<body>
+		<FloatingFollowBar />
 		<Header />
 		<main>
 			<Contact 
@@ -123,7 +125,7 @@ const socialLinks = {
 				socialLinks={socialLinks}
 			/>
 		</main>
-		<Footer />
+		<Footer connectId={false} />
 		<ScrollToBottom />
 	</body>
 </html>

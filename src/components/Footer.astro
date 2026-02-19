@@ -1,4 +1,9 @@
 ---
+interface Props {
+	/** When false (e.g. on Contact page), footer does not use id="connect" so the in-page connect section is the target. */
+	connectId?: boolean;
+}
+const { connectId = true } = Astro.props;
 ---
 
 <section class="footer-cta">
@@ -28,7 +33,7 @@
 				<a href="/contact">Contact</a>
 			</nav>
 		</div>
-		<div class="footer-section">
+		<div class="footer-section" id={connectId ? "connect" : undefined}>
 			<h4 class="footer-heading">Let's Connect</h4>
 			<nav class="footer-nav">
 				<a href="https://www.linkedin.com/in/minhaj-nadeem/" target="_blank" rel="noopener noreferrer">LinkedIn</a>

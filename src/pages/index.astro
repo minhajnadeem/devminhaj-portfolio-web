@@ -8,6 +8,7 @@ import LeadMagnet from '../components/LeadMagnet.astro';
 import Content from '../components/Content.astro';
 import Footer from '../components/Footer.astro';
 import ScrollToBottom from '../components/ScrollToBottom.astro';
+import FloatingFollowBar from '../components/FloatingFollowBar.astro';
 
 // Content data extracted from content/home.md
 const heroData = {
@@ -143,6 +144,7 @@ const leadMagnetData = {
 		</style>
 	</head>
 	<body>
+		<FloatingFollowBar />
 		<Header />
 		<main>
 			<Hero 
