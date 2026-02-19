@@ -1,0 +1,104 @@
+---
+---
+<button
+	type="button"
+	class="scroll-fab"
+	aria-label="Scroll to bottom"
+	title="Scroll to bottom"
+>
+	<svg class="scroll-fab-icon scroll-fab-icon-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<path d="M12 5v14M19 12l-7 7-7-7" />
+	</svg>
+	<svg class="scroll-fab-icon scroll-fab-icon-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<path d="M12 19V5M5 12l7-7 7 7" />
+	</svg>
+</button>
+
+<style>
+	.scroll-fab {
+		position: fixed;
+		bottom: 1.5rem;
+		right: 1.5rem;
+		z-index: 100;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 50%;
+		background: var(--color-navy, #1b3956);
+		color: var(--color-white, #f7f0f0);
+		border: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: var(--shadow-lg, 0 10px 25px rgba(27, 57, 86, 0.15));
+		transition: transform 0.2s ease, background 0.2s ease;
+	}
+
+	.scroll-fab:hover {
+		background: var(--color-teal, #2f9983);
+		transform: translateY(-2px);
+	}
+
+	.scroll-fab:active {
+		transform: translateY(0);
+	}
+
+	.scroll-fab-icon {
+		position: absolute;
+		width: 1.5rem;
+		height: 1.5rem;
+		transition: opacity 0.2s ease;
+	}
+
+	.scroll-fab-icon-up {
+		opacity: 0;
+	}
+
+	.scroll-fab.at-bottom .scroll-fab-icon-down {
+		opacity: 0;
+	}
+
+	.scroll-fab.at-bottom .scroll-fab-icon-up {
+		opacity: 1;
+	}
+
+	@media (max-width: 640px) {
+		.scroll-fab {
+			bottom: 1rem;
+			right: 1rem;
+			width: 2.75rem;
+			height: 2.75rem;
+		}
+
+		.scroll-fab-icon {
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+	}
+</style>
+
+<script>
+	const btn = document.querySelector<HTMLButtonElement>('.scroll-fab');
+	if (btn) {
+		const threshold = 80;
+
+		const updateState = () => {
+			const scrollBottom = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
+			const atBottom = scrollBottom < threshold;
+			btn.classList.toggle('at-bottom', atBottom);
+			btn.setAttribute('aria-label', atBottom ? 'Scroll to top' : 'Scroll to bottom');
+			btn.setAttribute('title', atBottom ? 'Scroll to top' : 'Scroll to bottom');
+		};
+
+		btn.addEventListener('click', () => {
+			const atBottom = btn.classList.contains('at-bottom');
+			window.scrollTo({
+				top: atBottom ? 0 : document.documentElement.scrollHeight,
+				behavior: 'smooth'
+			});
+		});
+
+		window.addEventListener('scroll', updateState, { passive: true });
+		updateState();
+	}
+</script>
