@@ -18,8 +18,20 @@ if (!project) {
 
 const imageUrls = getProjectImages(project);
 const heroImage = imageUrls[0] ?? null;
-const remainingImages = imageUrls.slice(1);
+const introImages = imageUrls.slice(0, 2);
+/** Screenshots beyond the first two (section only shown when there are more than 2 total) */
+const remainingImages = imageUrls.slice(2);
 const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform Flutter";
+
+/** Categorize links for "Available on" and primary CTA */
+function getLinkCategories(links: { label: string; url: string }[]) {
+	const playStore = links.find((l) => l.label.toLowerCase().includes("play store") || l.url.includes("play.google.com"));
+	const appStore = links.find((l) => l.label.toLowerCase().includes("app store") || l.url.includes("apps.apple.com"));
+	const website = links.find((l) => l.label.toLowerCase().includes("website") || l.label === "Project Page");
+	const primaryLink = website ?? playStore ?? appStore ?? links[0];
+	return { playStore, appStore, website, primaryLink, all: links };
+}
+const linkCategories = project.links?.length ? getLinkCategories(project.links) : null;
 ---
 
 <!doctype html>
@@ -53,47 +65,60 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 		<FloatingFollowBar />
 		<Header />
 		<main class="project-detail">
-			{heroImage && (
-				<section class="project-detail-hero" aria-label="Project preview">
-					<img
-						src={heroImage}
-						alt={`${project.name} — app preview`}
-						class="project-detail-hero-img"
-						fetchpriority="high"
-					/>
-				</section>
-			)}
-			<div class="project-detail-container">
-				<a href="/portfolio" class="project-detail-back">← Back to Portfolio</a>
-
-				<header class="project-detail-header">
-					<span class="project-detail-type">{typeLabel}</span>
-					<h1 class="project-detail-title">{project.name}</h1>
-					<p class="project-detail-description">{project.description}</p>
-					{project.note && <p class="project-detail-note">{project.note}</p>}
-				</header>
-
-				{remainingImages.length > 0 && (
-					<section class="project-detail-screenshots" aria-label="More app screenshots">
-						<h2 class="project-detail-section-title">More screenshots</h2>
-						<div class="project-detail-screenshots-grid">
-							{remainingImages.map((src) => (
-								<img
-									src={src}
-									alt={`${project.name} screenshot`}
-									class="project-detail-screenshot"
-									loading="lazy"
-									decoding="async"
-								/>
+			<!-- Hero: dark header with title, subtitle, and app preview -->
+			<section class="project-detail-hero" aria-label="Project overview">
+				<div class="project-detail-hero-bg">
+					{heroImage && <img src={heroImage} alt="" class="project-detail-hero-bg-img" fetchpriority="high" />}
+					<div class="project-detail-hero-overlay"></div>
+				</div>
+				<div class="project-detail-hero-content">
+					<a href="/portfolio" class="project-detail-back">← Back</a>
+					<h1 class="project-detail-hero-title">{project.name}</h1>
+					<p class="project-detail-hero-subtitle">{project.description}</p>
+					{introImages.length > 0 && (
+						<div class="project-detail-hero-preview" aria-hidden="true">
+							{introImages.map((src, i) => (
+								<button type="button" class="project-detail-hero-preview-item project-detail-lightbox-trigger" style={`--i: ${i}`} data-src={src} aria-label="View full size">
+									<img src={src} alt="" loading="lazy" />
+								</button>
 							))}
 						</div>
-					</section>
-				)}
+					)}
+				</div>
+			</section>
 
+			<div class="project-detail-body">
+				<!-- Introduction: two columns -->
+				<section class="project-detail-intro">
+					<div class="project-detail-intro-grid">
+						<div class="project-detail-intro-content">
+							<div class="project-detail-intro-icon" aria-hidden="true">
+								<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+									<line x1="12" y1="18" x2="12.01" y2="18"/>
+								</svg>
+							</div>
+							<span class="project-detail-type">{typeLabel}</span>
+							<p class="project-detail-intro-text">{project.description}</p>
+							{project.note && <p class="project-detail-note">{project.note}</p>}
+						</div>
+						{introImages.length > 0 && (
+							<div class="project-detail-intro-visual">
+								{introImages.map((src) => (
+									<button type="button" class="project-detail-intro-img-wrap project-detail-lightbox-trigger" data-src={src} aria-label="View full size">
+										<img src={src} alt={`${project.name} screenshot`} loading="lazy" />
+									</button>
+								))}
+							</div>
+						)}
+					</div>
+				</section>
+
+				<!-- Key Features (plan-style dark block) -->
 				{project.keyFeatures && project.keyFeatures.length > 0 && (
-					<section class="project-detail-section">
-						<h2 class="project-detail-section-title">Key Features</h2>
-						<ul class="project-detail-list">
+					<section class="project-detail-block project-detail-block--dark" aria-labelledby="key-features-heading">
+						<h2 id="key-features-heading" class="project-detail-block-title">Key Features</h2>
+						<ul class="project-detail-block-list">
 							{project.keyFeatures.map((item) => (
 								<li>{item}</li>
 							))}
@@ -101,8 +126,29 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 					</section>
 				)}
 
-				<section class="project-detail-section">
-					<h2 class="project-detail-section-title">Tech Stack</h2>
+				<!-- Screenshots grid -->
+				{remainingImages.length > 0 && (
+					<section class="project-detail-screenshots" aria-label="App screenshots">
+						<h2 class="project-detail-section-title">Screenshots <span class="project-detail-section-hint">(click to expand)</span></h2>
+						<div class="project-detail-screenshots-grid">
+							{remainingImages.map((src) => (
+								<button type="button" class="project-detail-screenshot-wrap project-detail-lightbox-trigger" data-src={src} aria-label="View full size">
+									<img
+										src={src}
+										alt={`${project.name} screenshot`}
+										class="project-detail-screenshot"
+										loading="lazy"
+										decoding="async"
+									/>
+								</button>
+							))}
+						</div>
+					</section>
+				)}
+
+				<!-- Tech Stack -->
+				<section class="project-detail-section" aria-labelledby="tech-heading">
+					<h2 id="tech-heading" class="project-detail-section-title">Tech Stack</h2>
 					<div class="project-detail-tech">
 						{project.tech.map((t) => (
 							<span class="project-detail-pill">{t}</span>
@@ -110,9 +156,10 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 					</div>
 				</section>
 
+				<!-- My Role -->
 				{project.role && project.role.length > 0 && (
-					<section class="project-detail-section">
-						<h2 class="project-detail-section-title">My Role</h2>
+					<section class="project-detail-section" aria-labelledby="role-heading">
+						<h2 id="role-heading" class="project-detail-section-title">My Role</h2>
 						<ul class="project-detail-list">
 							{project.role.map((item) => (
 								<li>{item}</li>
@@ -121,9 +168,10 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 					</section>
 				)}
 
+				<!-- Achievements -->
 				{project.achievements && project.achievements.length > 0 && (
-					<section class="project-detail-section">
-						<h2 class="project-detail-section-title">Achievements</h2>
+					<section class="project-detail-section" aria-labelledby="achievements-heading">
+						<h2 id="achievements-heading" class="project-detail-section-title">Achievements</h2>
 						<ul class="project-detail-list">
 							{project.achievements.map((item) => (
 								<li>{item}</li>
@@ -132,9 +180,39 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 					</section>
 				)}
 
+				<!-- Result / Links -->
 				{project.links && project.links.length > 0 && (
-					<section class="project-detail-section project-detail-links">
-						<h2 class="project-detail-section-title">Links</h2>
+					<section class="project-detail-result" aria-labelledby="links-heading">
+						<h2 id="links-heading" class="project-detail-section-title">Links</h2>
+						{linkCategories?.primaryLink && (
+							<a
+								href={linkCategories.primaryLink.url}
+								class="project-detail-cta-btn"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{linkCategories.primaryLink.label}
+							</a>
+						)}
+						{(linkCategories?.playStore || linkCategories?.appStore) && (
+							<div class="project-detail-available">
+								<span class="project-detail-available-label">Available on</span>
+								<div class="project-detail-store-btns">
+									{linkCategories.appStore && (
+										<a href={linkCategories.appStore.url} class="project-detail-store-btn" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+											App Store
+										</a>
+									)}
+									{linkCategories.playStore && (
+										<a href={linkCategories.playStore.url} class="project-detail-store-btn" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.302 2.302-8.636-8.636z"/></svg>
+											Google Play
+										</a>
+									)}
+								</div>
+							</div>
+						)}
 						<div class="project-detail-links-grid">
 							{project.links.map((link) => (
 								<a
@@ -150,7 +228,54 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 					</section>
 				)}
 			</div>
+
+			<!-- CTA strip -->
+			<section class="project-detail-cta">
+				<div class="project-detail-cta-inner">
+					<p class="project-detail-cta-title">Have a project in mind?</p>
+					<p class="project-detail-cta-sub">Let's build something great together.</p>
+					<a href="/contact" class="project-detail-cta-button">Get in touch</a>
+				</div>
+			</section>
+
+			<!-- Lightbox for full-size screenshots -->
+			<div id="project-lightbox" class="project-detail-lightbox" role="dialog" aria-modal="true" aria-label="Screenshot full size" hidden>
+				<button type="button" class="project-detail-lightbox-close" aria-label="Close">×</button>
+				<div class="project-detail-lightbox-backdrop"></div>
+				<div class="project-detail-lightbox-content">
+					<img id="project-lightbox-img" src="" alt="Screenshot full size" />
+				</div>
+			</div>
 		</main>
+		<script>
+			(function () {
+				const lightbox = document.getElementById('project-lightbox');
+				const img = document.getElementById('project-lightbox-img');
+				const closeBtn = lightbox?.querySelector('.project-detail-lightbox-close');
+				const backdrop = lightbox?.querySelector('.project-detail-lightbox-backdrop');
+				const triggers = document.querySelectorAll('.project-detail-lightbox-trigger');
+
+				function open(src) {
+					if (!lightbox || !img) return;
+					img.src = src;
+					lightbox.hidden = false;
+					document.body.style.overflow = 'hidden';
+					closeBtn?.focus();
+				}
+				function close() {
+					if (!lightbox) return;
+					lightbox.hidden = true;
+					document.body.style.overflow = '';
+				}
+
+				triggers.forEach((el) => {
+					el.addEventListener('click', () => open(el.dataset.src || ''));
+				});
+				closeBtn?.addEventListener('click', close);
+				backdrop?.addEventListener('click', close);
+				document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox && !lightbox.hidden) close(); });
+			})();
+		</script>
 		<Footer />
 		<ScrollToBottom />
 	</body>
@@ -158,12 +283,47 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 
 <style>
 	.project-detail {
-		padding: 2rem 1.5rem 4rem;
+		padding-bottom: 0;
 		min-height: 60vh;
 	}
-	.project-detail-container {
-		max-width: 720px;
+
+	/* —— Hero —— */
+	.project-detail-hero {
+		position: relative;
+		min-height: 72vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+	.project-detail-hero-bg {
+		position: absolute;
+		inset: 0;
+		background: var(--color-navy);
+	}
+	.project-detail-hero-bg-img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.35;
+		filter: blur(8px);
+		transform: scale(1.05);
+	}
+	.project-detail-hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(27, 57, 86, 0.85) 0%, rgba(27, 57, 86, 0.95) 100%);
+	}
+	.project-detail-hero-content {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		max-width: 1100px;
 		margin: 0 auto;
+		padding: 2rem 1.5rem 3rem;
+		text-align: center;
 	}
 	.project-detail-back {
 		display: inline-block;
@@ -171,14 +331,100 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 		font-weight: 600;
 		color: var(--color-teal);
 		text-decoration: none;
-		margin-bottom: 2rem;
-		transition: color 0.2s ease;
+		margin-bottom: 1.5rem;
+		transition: color 0.2s ease, opacity 0.2s ease;
 	}
 	.project-detail-back:hover {
-		color: var(--color-navy);
+		color: #5bc4b0;
+		opacity: 0.95;
 	}
-	.project-detail-header {
-		margin-bottom: 2.5rem;
+	.project-detail-hero-title {
+		font-size: clamp(2rem, 5vw, 3.25rem);
+		font-weight: 800;
+		color: #fff;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+	}
+	.project-detail-hero-subtitle {
+		font-size: clamp(1rem, 2.2vw, 1.2rem);
+		color: rgba(255, 255, 255, 0.9);
+		max-width: 640px;
+		margin: 0 auto 2.5rem;
+		line-height: 1.6;
+	}
+	.project-detail-hero-preview {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+		margin-top: 2rem;
+	}
+	.project-detail-hero-preview-item {
+		--i: 0;
+		max-width: 420px;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+		transform: rotate(calc(-4deg + var(--i) * 4deg)) translateY(calc(var(--i) * 6px));
+		cursor: pointer;
+		border: none;
+		padding: 0;
+		background: none;
+		font: inherit;
+	}
+	.project-detail-hero-preview-item img {
+		width: 100%;
+		height: auto;
+		display: block;
+		vertical-align: middle;
+	}
+	@media (min-width: 900px) {
+		.project-detail-hero-preview-item { max-width: 480px; }
+	}
+
+	/* —— Body container —— */
+	.project-detail-body {
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 0 1.5rem 4rem;
+	}
+
+	/* —— Intro two-column —— */
+	.project-detail-intro {
+		margin-top: -2rem;
+		margin-bottom: 3rem;
+	}
+	.project-detail-intro-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		align-items: start;
+		background: #fff;
+		border-radius: 16px;
+		box-shadow: 0 4px 24px rgba(27, 57, 86, 0.08);
+		padding: 2rem;
+	}
+	@media (min-width: 768px) {
+		.project-detail-intro-grid {
+			grid-template-columns: 1fr 1fr;
+			padding: 2.5rem;
+		}
+	}
+	.project-detail-intro-icon {
+		width: 64px;
+		height: 64px;
+		background: var(--color-navy);
+		border-radius: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		margin-bottom: 1rem;
+	}
+	.project-detail-intro-icon svg {
+		flex-shrink: 0;
 	}
 	.project-detail-type {
 		display: inline-block;
@@ -190,64 +436,136 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 		background: rgba(47, 153, 131, 0.12);
 		padding: 0.35rem 0.75rem;
 		border-radius: 6px;
-		margin-bottom: 0.75rem;
+		margin-bottom: 1rem;
 	}
-	.project-detail-title {
-		font-size: clamp(1.75rem, 4vw, 2.5rem);
-		font-weight: 800;
-		color: var(--color-navy);
-		margin: 0 0 1rem 0;
-		line-height: 1.2;
-	}
-	.project-detail-description {
+	.project-detail-intro-text {
 		font-size: 1.05rem;
 		color: var(--color-text-light);
 		line-height: 1.7;
-		margin: 0;
+		margin: 0 0 0.5rem 0;
 	}
 	.project-detail-note {
 		font-size: 0.9rem;
 		color: var(--color-text-light);
 		font-style: italic;
-		margin: 1rem 0 0 0;
+		margin: 0;
 	}
-	.project-detail-hero {
-		width: 100%;
-		aspect-ratio: 16 / 10;
-		max-height: 420px;
+	.project-detail-intro-visual {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.project-detail-intro-img-wrap {
+		max-width: 380px;
+		border-radius: 12px;
 		overflow: hidden;
-		background: linear-gradient(145deg, var(--color-navy) 0%, #2a4a6e 100%);
+		box-shadow: 0 4px 20px rgba(27, 57, 86, 0.1);
+		background: rgba(0, 0, 0, 0.03);
+		cursor: pointer;
+		border: none;
+		padding: 0;
+		font: inherit;
 	}
-	.project-detail-hero-img {
+	.project-detail-intro-img-wrap img {
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		height: auto;
 		display: block;
+		vertical-align: middle;
 	}
+	@media (min-width: 768px) {
+		.project-detail-intro-img-wrap { max-width: 420px; }
+	}
+
+	/* —— Dark block (Key Features) —— */
+	.project-detail-block {
+		border-radius: 16px;
+		padding: 2rem 1.5rem;
+		margin-bottom: 2.5rem;
+	}
+	.project-detail-block--dark {
+		background: var(--color-navy);
+		color: #f7f0f0;
+	}
+	.project-detail-block-title {
+		font-size: 1.35rem;
+		font-weight: 700;
+		margin: 0 0 1rem 0;
+		color: inherit;
+	}
+	.project-detail-block-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.project-detail-block-list li {
+		position: relative;
+		padding-left: 1.5rem;
+		margin-bottom: 0.6rem;
+		line-height: 1.5;
+		opacity: 0.95;
+	}
+	.project-detail-block-list li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.5em;
+		width: 6px;
+		height: 6px;
+		background: var(--color-teal);
+		border-radius: 50%;
+	}
+
+	/* —— Screenshots —— */
 	.project-detail-screenshots {
 		margin-bottom: 2.5rem;
 	}
+	.project-detail-section-title {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--color-navy);
+		margin: 0 0 1rem 0;
+	}
+	.project-detail-section-hint {
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: var(--color-text-light);
+	}
 	.project-detail-screenshots-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-		gap: 1rem;
-		margin-top: 0.75rem;
+		grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+		gap: 1.5rem;
+		margin-top: 0.5rem;
+	}
+	@media (min-width: 800px) {
+		.project-detail-screenshots-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.project-detail-screenshot-wrap {
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 2px 16px rgba(27, 57, 86, 0.08);
+		background: rgba(0, 0, 0, 0.02);
+		cursor: pointer;
+		border: none;
+		padding: 0;
+		font: inherit;
+		text-align: left;
+	}
+	.project-detail-screenshot-wrap:hover {
+		box-shadow: 0 4px 24px rgba(27, 57, 86, 0.12);
 	}
 	.project-detail-screenshot {
 		width: 100%;
-		aspect-ratio: 9 / 19.5;
-		object-fit: cover;
-		border-radius: 12px;
-		box-shadow: 0 2px 12px rgba(27, 57, 86, 0.1);
+		height: auto;
+		display: block;
+		vertical-align: middle;
 	}
+
+	/* —— Section —— */
 	.project-detail-section {
 		margin-bottom: 2.5rem;
-	}
-	.project-detail-section-title {
-		font-size: 1.1rem;
-		font-weight: 700;
-		color: var(--color-navy);
-		margin: 0 0 0.75rem 0;
 	}
 	.project-detail-list {
 		padding-left: 1.25rem;
@@ -271,6 +589,59 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 		padding: 0.35rem 0.65rem;
 		border-radius: 6px;
 	}
+
+	/* —— Result / Links —— */
+	.project-detail-result {
+		margin-bottom: 2rem;
+	}
+	.project-detail-cta-btn {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		background: var(--color-teal);
+		color: #fff;
+		font-weight: 600;
+		font-size: 1rem;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: background 0.2s ease, transform 0.2s ease;
+		margin-bottom: 1.5rem;
+	}
+	.project-detail-cta-btn:hover {
+		background: #247a68;
+		transform: translateY(-2px);
+	}
+	.project-detail-available {
+		margin-bottom: 1rem;
+	}
+	.project-detail-available-label {
+		display: block;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-navy);
+		margin-bottom: 0.5rem;
+	}
+	.project-detail-store-btns {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+	.project-detail-store-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: #1a1a1a;
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+	.project-detail-store-btn:hover {
+		background: #333;
+		transform: translateY(-2px);
+	}
 	.project-detail-links-grid {
 		display: flex;
 		flex-wrap: wrap;
@@ -280,16 +651,111 @@ const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform
 	.project-detail-link-btn {
 		display: inline-block;
 		padding: 0.6rem 1.25rem;
-		background: var(--color-teal);
-		color: #fff;
+		background: rgba(47, 153, 131, 0.15);
+		color: var(--color-teal);
 		font-weight: 600;
 		font-size: 0.9rem;
 		text-decoration: none;
 		border-radius: 8px;
-		transition: background 0.2s ease, transform 0.2s ease;
+		border: 1px solid rgba(47, 153, 131, 0.35);
+		transition: background 0.2s ease, border-color 0.2s ease;
 	}
 	.project-detail-link-btn:hover {
+		background: rgba(47, 153, 131, 0.25);
+		border-color: var(--color-teal);
+	}
+
+	/* —— CTA strip —— */
+	.project-detail-cta {
+		background: var(--color-navy);
+		color: #f7f0f0;
+		padding: 3rem 1.5rem;
+		text-align: center;
+	}
+	.project-detail-cta-inner {
+		max-width: 560px;
+		margin: 0 auto;
+	}
+	.project-detail-cta-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 0 0 0.25rem 0;
+	}
+	.project-detail-cta-sub {
+		font-size: 1rem;
+		opacity: 0.9;
+		margin: 0 0 1.5rem 0;
+	}
+	.project-detail-cta-button {
+		display: inline-block;
+		padding: 0.75rem 1.75rem;
+		background: var(--color-teal);
+		color: #fff;
+		font-weight: 600;
+		font-size: 1rem;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+	.project-detail-cta-button:hover {
 		background: #247a68;
 		transform: translateY(-2px);
+	}
+
+	/* —— Lightbox —— */
+	.project-detail-lightbox {
+		position: fixed;
+		inset: 0;
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+	}
+	.project-detail-lightbox[hidden] {
+		display: none;
+	}
+	.project-detail-lightbox-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.88);
+		cursor: pointer;
+	}
+	.project-detail-lightbox-content {
+		position: relative;
+		z-index: 1;
+		max-width: 95vw;
+		max-height: 95vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.project-detail-lightbox-content img {
+		max-width: 95vw;
+		max-height: 95vh;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+	}
+	.project-detail-lightbox-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		z-index: 2;
+		width: 48px;
+		height: 48px;
+		border: none;
+		background: rgba(255, 255, 255, 0.15);
+		color: #fff;
+		font-size: 1.75rem;
+		line-height: 1;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+	.project-detail-lightbox-close:hover {
+		background: rgba(255, 255, 255, 0.25);
 	}
 </style>
