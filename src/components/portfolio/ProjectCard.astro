@@ -35,7 +35,6 @@ const snippet = project.roleSnippet ?? project.achievementSnippet ?? "";
 			</div>
 		</div>
 		<div class="portfolio-card-body">
-			<h3 class="portfolio-card-title">{project.name}</h3>
 			<p class="portfolio-card-description">{project.description}</p>
 			<div class="portfolio-card-tech" role="list">
 				{project.tech.slice(0, 5).map((t) => (
@@ -165,14 +164,6 @@ const snippet = project.roleSnippet ?? project.achievementSnippet ?? "";
 		flex-direction: column;
 		gap: 0.6rem;
 		flex: 1;
-	}
-
-	.portfolio-card-title {
-		font-size: 1.1rem;
-		font-weight: 700;
-		color: var(--color-navy, #1b3956);
-		margin: 0;
-		line-height: 1.2;
 	}
 
 	.portfolio-card-description {

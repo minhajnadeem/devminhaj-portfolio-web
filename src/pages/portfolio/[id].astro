@@ -29,7 +29,10 @@ function getLinkCategories(links: { label: string; url: string }[]) {
 	const appStore = links.find((l) => l.label.toLowerCase().includes("app store") || l.url.includes("apps.apple.com"));
 	const website = links.find((l) => l.label.toLowerCase().includes("website") || l.label === "Project Page");
 	const primaryLink = website ?? playStore ?? appStore ?? links[0];
-	return { playStore, appStore, website, primaryLink, all: links };
+	/** Links already shown as primary CTA or "Available on" — don't repeat in chips */
+	const shownUrls = new Set([primaryLink, playStore, appStore, website].filter(Boolean).map((l) => l!.url));
+	const otherLinks = links.filter((l) => !shownUrls.has(l.url));
+	return { playStore, appStore, website, primaryLink, otherLinks, all: links };
 }
 const linkCategories = project.links?.length ? getLinkCategories(project.links) : null;
 ---
@@ -213,18 +216,20 @@ const linkCategories = project.links?.length ? getLinkCategories(project.links) 
 								</div>
 							</div>
 						)}
-						<div class="project-detail-links-grid">
-							{project.links.map((link) => (
-								<a
-									href={link.url}
-									class="project-detail-link-btn"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{link.label}
-								</a>
-							))}
-						</div>
+						{linkCategories?.otherLinks && linkCategories.otherLinks.length > 0 && (
+							<div class="project-detail-links-grid">
+								{linkCategories.otherLinks.map((link) => (
+									<a
+										href={link.url}
+										class="project-detail-link-btn"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{link.label}
+									</a>
+								))}
+							</div>
+						)}
 					</section>
 				)}
 			</div>
