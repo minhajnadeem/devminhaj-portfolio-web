@@ -1,0 +1,122 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import type { PortfolioProject } from "../../data/portfolio";
+import { portfolioProjects } from "../../data/portfolio";
+
+interface Props {
+	projects?: PortfolioProject[];
+}
+const { projects = portfolioProjects } = Astro.props;
+---
+
+<div class="portfolio-filter-grid" data-portfolio-filter-wrapper data-filter="all">
+	<div class="portfolio-filter-actions" role="group" aria-label="Filter projects by platform">
+		<button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">
+			All
+		</button>
+		<button type="button" class="filter-btn" data-filter="native" aria-pressed="false">
+			Native Android
+		</button>
+		<button type="button" class="filter-btn" data-filter="flutter" aria-pressed="false">
+			Cross-Platform Flutter
+		</button>
+	</div>
+	<div class="portfolio-grid" data-portfolio-grid>
+		{projects.map((project) => (
+			<ProjectCard project={project} />
+		))}
+	</div>
+</div>
+
+<script>
+	function initPortfolioFilter() {
+		const wrapper = document.querySelector("[data-portfolio-filter-wrapper]");
+		if (!wrapper) return;
+		const buttons = wrapper.querySelectorAll(".filter-btn");
+		if (!buttons.length) return;
+
+		buttons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const filter = btn.getAttribute("data-filter") ?? "all";
+				wrapper.setAttribute("data-filter", filter);
+				buttons.forEach((b) => {
+					const isActive = b.getAttribute("data-filter") === filter;
+					b.classList.toggle("active", isActive);
+					b.setAttribute("aria-pressed", String(isActive));
+				});
+			});
+		});
+	}
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initPortfolioFilter);
+	} else {
+		initPortfolioFilter();
+	}
+</script>
+
+<style>
+	.portfolio-filter-grid {
+		--portfolio-filter: all;
+	}
+
+	.portfolio-filter-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.filter-btn {
+		font-family: inherit;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-navy, #1b3956);
+		background: rgba(27, 57, 86, 0.06);
+		border: 1px solid rgba(27, 57, 86, 0.15);
+		padding: 0.5rem 1rem;
+		border-radius: 999px;
+		cursor: pointer;
+		transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+	}
+
+	.filter-btn:hover {
+		background: rgba(27, 57, 86, 0.1);
+		border-color: rgba(27, 57, 86, 0.25);
+	}
+
+	.filter-btn.active {
+		background: var(--color-teal, #2f9983);
+		border-color: var(--color-teal, #2f9983);
+		color: #fff;
+	}
+
+	.portfolio-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: start;
+		gap: 1.5rem;
+	}
+
+	@media (min-width: 640px) {
+		.portfolio-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 960px) {
+		.portfolio-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.75rem;
+		}
+	}
+
+	/* Filter: show only matching cards (use :global so we match child component output) */
+	[data-portfolio-filter-wrapper][data-filter="native"] :global([data-project-type]:not([data-project-type="native"])) {
+		display: none;
+	}
+
+	[data-portfolio-filter-wrapper][data-filter="flutter"] :global([data-project-type]:not([data-project-type="flutter"])) {
+		display: none;
+	}
+</style>

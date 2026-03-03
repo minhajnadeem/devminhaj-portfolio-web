@@ -1,0 +1,77 @@
+---
+import FeaturedProjectCard from "./FeaturedProjectCard.astro";
+import type { PortfolioProject } from "../../data/portfolio";
+import { featuredProjects } from "../../data/portfolio";
+
+interface Props {
+	heroHeading?: string;
+	heroSubheadline?: string;
+	featured?: PortfolioProject[];
+}
+const {
+	heroHeading = "My Portfolio",
+	heroSubheadline = "A curated selection of production mobile applications I've developed — from consumer apps to enterprise tools.",
+	featured = featuredProjects,
+} = Astro.props;
+---
+
+<section class="portfolio-hero" id="portfolio-hero">
+	<div class="portfolio-hero-container">
+		<h1 class="portfolio-hero-heading">{heroHeading}</h1>
+		<p class="portfolio-hero-subheadline">{heroSubheadline}</p>
+		<div class="portfolio-hero-featured">
+			{featured.map((project) => (
+				<FeaturedProjectCard project={project} />
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.portfolio-hero {
+		padding: 5rem 1.5rem 4rem;
+		background: var(--color-bg, #f7f0f0);
+		text-align: center;
+	}
+
+	.portfolio-hero-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.portfolio-hero-heading {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 800;
+		color: var(--color-navy, #1b3956);
+		margin: 0 0 1rem 0;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+	}
+
+	.portfolio-hero-subheadline {
+		font-size: clamp(1rem, 2vw, 1.2rem);
+		color: var(--color-text-light, #6b7280);
+		line-height: 1.6;
+		margin: 0 auto 3rem;
+		max-width: 640px;
+	}
+
+	.portfolio-hero-featured {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+		text-align: left;
+	}
+
+	@media (min-width: 900px) {
+		.portfolio-hero-featured {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1100px) {
+		.portfolio-hero-featured {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+</style>

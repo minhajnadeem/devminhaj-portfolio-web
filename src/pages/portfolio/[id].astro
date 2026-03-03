@@ -1,0 +1,295 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ScrollToBottom from "../../components/ScrollToBottom.astro";
+import FloatingFollowBar from "../../components/FloatingFollowBar.astro";
+import { getProjectById, getProjectImages, portfolioProjects } from "../../data/portfolio";
+
+export function getStaticPaths() {
+	return portfolioProjects.map((p) => ({ params: { id: p.id } }));
+}
+
+const { id } = Astro.params;
+const project = id ? getProjectById(id) : undefined;
+
+if (!project) {
+	return Astro.redirect("/portfolio");
+}
+
+const imageUrls = getProjectImages(project);
+const heroImage = imageUrls[0] ?? null;
+const remainingImages = imageUrls.slice(1);
+const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform Flutter";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={`${project.name} - ${project.pitch}`} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{project.name} - Portfolio - Muhammad Minhaj Nadeem</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<style is:global>
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			:root {
+				--color-teal: #2f9983;
+				--color-navy: #1b3956;
+				--color-text-light: #6b7280;
+				--color-bg: #f7f0f0;
+				--font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			}
+			html { scroll-behavior: smooth; }
+			body { font-family: var(--font-family); color: var(--color-navy); background: var(--color-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+			a { color: inherit; }
+			img { max-width: 100%; height: auto; }
+		</style>
+	</head>
+	<body>
+		<FloatingFollowBar />
+		<Header />
+		<main class="project-detail">
+			{heroImage && (
+				<section class="project-detail-hero" aria-label="Project preview">
+					<img
+						src={heroImage}
+						alt={`${project.name} — app preview`}
+						class="project-detail-hero-img"
+						fetchpriority="high"
+					/>
+				</section>
+			)}
+			<div class="project-detail-container">
+				<a href="/portfolio" class="project-detail-back">← Back to Portfolio</a>
+
+				<header class="project-detail-header">
+					<span class="project-detail-type">{typeLabel}</span>
+					<h1 class="project-detail-title">{project.name}</h1>
+					<p class="project-detail-description">{project.description}</p>
+					{project.note && <p class="project-detail-note">{project.note}</p>}
+				</header>
+
+				{remainingImages.length > 0 && (
+					<section class="project-detail-screenshots" aria-label="More app screenshots">
+						<h2 class="project-detail-section-title">More screenshots</h2>
+						<div class="project-detail-screenshots-grid">
+							{remainingImages.map((src) => (
+								<img
+									src={src}
+									alt={`${project.name} screenshot`}
+									class="project-detail-screenshot"
+									loading="lazy"
+									decoding="async"
+								/>
+							))}
+						</div>
+					</section>
+				)}
+
+				{project.keyFeatures && project.keyFeatures.length > 0 && (
+					<section class="project-detail-section">
+						<h2 class="project-detail-section-title">Key Features</h2>
+						<ul class="project-detail-list">
+							{project.keyFeatures.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</section>
+				)}
+
+				<section class="project-detail-section">
+					<h2 class="project-detail-section-title">Tech Stack</h2>
+					<div class="project-detail-tech">
+						{project.tech.map((t) => (
+							<span class="project-detail-pill">{t}</span>
+						))}
+					</div>
+				</section>
+
+				{project.role && project.role.length > 0 && (
+					<section class="project-detail-section">
+						<h2 class="project-detail-section-title">My Role</h2>
+						<ul class="project-detail-list">
+							{project.role.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</section>
+				)}
+
+				{project.achievements && project.achievements.length > 0 && (
+					<section class="project-detail-section">
+						<h2 class="project-detail-section-title">Achievements</h2>
+						<ul class="project-detail-list">
+							{project.achievements.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</section>
+				)}
+
+				{project.links && project.links.length > 0 && (
+					<section class="project-detail-section project-detail-links">
+						<h2 class="project-detail-section-title">Links</h2>
+						<div class="project-detail-links-grid">
+							{project.links.map((link) => (
+								<a
+									href={link.url}
+									class="project-detail-link-btn"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{link.label}
+								</a>
+							))}
+						</div>
+					</section>
+				)}
+			</div>
+		</main>
+		<Footer />
+		<ScrollToBottom />
+	</body>
+</html>
+
+<style>
+	.project-detail {
+		padding: 2rem 1.5rem 4rem;
+		min-height: 60vh;
+	}
+	.project-detail-container {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+	.project-detail-back {
+		display: inline-block;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-teal);
+		text-decoration: none;
+		margin-bottom: 2rem;
+		transition: color 0.2s ease;
+	}
+	.project-detail-back:hover {
+		color: var(--color-navy);
+	}
+	.project-detail-header {
+		margin-bottom: 2.5rem;
+	}
+	.project-detail-type {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-teal);
+		background: rgba(47, 153, 131, 0.12);
+		padding: 0.35rem 0.75rem;
+		border-radius: 6px;
+		margin-bottom: 0.75rem;
+	}
+	.project-detail-title {
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
+		font-weight: 800;
+		color: var(--color-navy);
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+	}
+	.project-detail-description {
+		font-size: 1.05rem;
+		color: var(--color-text-light);
+		line-height: 1.7;
+		margin: 0;
+	}
+	.project-detail-note {
+		font-size: 0.9rem;
+		color: var(--color-text-light);
+		font-style: italic;
+		margin: 1rem 0 0 0;
+	}
+	.project-detail-hero {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		max-height: 420px;
+		overflow: hidden;
+		background: linear-gradient(145deg, var(--color-navy) 0%, #2a4a6e 100%);
+	}
+	.project-detail-hero-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.project-detail-screenshots {
+		margin-bottom: 2.5rem;
+	}
+	.project-detail-screenshots-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 0.75rem;
+	}
+	.project-detail-screenshot {
+		width: 100%;
+		aspect-ratio: 9 / 19.5;
+		object-fit: cover;
+		border-radius: 12px;
+		box-shadow: 0 2px 12px rgba(27, 57, 86, 0.1);
+	}
+	.project-detail-section {
+		margin-bottom: 2.5rem;
+	}
+	.project-detail-section-title {
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--color-navy);
+		margin: 0 0 0.75rem 0;
+	}
+	.project-detail-list {
+		padding-left: 1.25rem;
+		margin: 0;
+	}
+	.project-detail-list li {
+		margin-bottom: 0.4rem;
+		color: var(--color-text-light);
+		line-height: 1.5;
+	}
+	.project-detail-tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.project-detail-pill {
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--color-teal);
+		background: rgba(47, 153, 131, 0.12);
+		padding: 0.35rem 0.65rem;
+		border-radius: 6px;
+	}
+	.project-detail-links-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 0.5rem;
+	}
+	.project-detail-link-btn {
+		display: inline-block;
+		padding: 0.6rem 1.25rem;
+		background: var(--color-teal);
+		color: #fff;
+		font-weight: 600;
+		font-size: 0.9rem;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+	.project-detail-link-btn:hover {
+		background: #247a68;
+		transform: translateY(-2px);
+	}
+</style>

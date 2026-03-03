@@ -1,0 +1,93 @@
+---
+interface Props {
+	/** Image URLs (first is default; multiple enable carousel on hover in parent) */
+	images: string[];
+	alt: string;
+	/** Optional class for wrapper */
+	class?: string;
+}
+const { images, alt, class: className = "" } = Astro.props;
+const src = images[0] ?? "";
+---
+
+<div class={`device-frame ${className}`}>
+	<div class="device-frame-inner">
+		{src ? (
+			<img
+				src={src}
+				alt={alt}
+				loading="lazy"
+				decoding="async"
+				class="device-frame-img"
+			/>
+		) : (
+			<div class="device-frame-placeholder" aria-hidden="true">
+				<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+					<line x1="12" y1="18" x2="12.01" y2="18"></line>
+				</svg>
+				<span>App</span>
+			</div>
+		)}
+	</div>
+</div>
+
+<style>
+	.device-frame {
+		--device-width: 160px;
+		--device-radius: 20px;
+		--device-inner-radius: 14px;
+		width: var(--device-width);
+		margin: 0 auto;
+		background: linear-gradient(145deg, #2a2a2e 0%, #1c1c1f 100%);
+		border-radius: var(--device-radius);
+		padding: 10px;
+		box-shadow:
+			0 20px 40px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	}
+
+	.device-frame-inner {
+		background: #000;
+		border-radius: var(--device-inner-radius);
+		overflow: hidden;
+		aspect-ratio: 9 / 19.5;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.device-frame-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+
+	:global(.portfolio-card:hover) .device-frame-img,
+	:global(.featured-card:hover) .device-frame-img {
+		transform: scale(1.05);
+	}
+
+	.device-frame-placeholder {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		color: rgba(255, 255, 255, 0.4);
+		font-size: 0.75rem;
+		font-weight: 500;
+	}
+
+	.device-frame-placeholder svg {
+		opacity: 0.6;
+	}
+
+	.device-frame.featured {
+		--device-width: 200px;
+		--device-radius: 24px;
+		--device-inner-radius: 18px;
+		padding: 12px;
+	}
+</style>

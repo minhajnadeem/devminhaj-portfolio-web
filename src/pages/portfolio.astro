@@ -1,62 +1,18 @@
 ---
 import Header from '../components/Header.astro';
-import Portfolio from '../components/Portfolio.astro';
 import Footer from '../components/Footer.astro';
 import ScrollToBottom from '../components/ScrollToBottom.astro';
 import FloatingFollowBar from '../components/FloatingFollowBar.astro';
-
-// Portfolio content
-const heroHeading = "My Portfolio";
-const heroSubheadline = "A collection of mobile applications I've built, ranging from fitness and sports to productivity and entertainment.";
-
-// App links from docs/links.md
-const apps = [
-	{
-		name: "Maxximus",
-		url: "https://play.google.com/store/apps/details?id=uk.maxximus.app"
-	},
-	{
-		name: "Badminton Famly+",
-		url: "https://play.google.com/store/apps/details?id=famly.plus"
-	},
-	{
-		name: "Final Touch",
-		url: "https://play.google.com/store/apps/details?id=io.devcrew.finaltouch"
-	},
-	{
-		name: "Twidlee",
-		url: "https://play.google.com/store/apps/details?id=com.twidlee.android"
-	},
-	{
-		name: "Hifz Online Diary",
-		url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz"
-	},
-	{
-		name: "Speedfame",
-		url: "https://play.google.com/store/apps/details?id=com.speedfame.fr"
-	},
-	{
-		name: "Pioneer Labs",
-		url: "https://play.google.com/store/apps/details?id=com.pioneercdx.labs"
-	},
-	{
-		name: "TerraGrow",
-		url: "https://play.google.com/store/apps/details?id=com.terragrow.farmersapp"
-	},
-	{
-		name: "Beat Bully Trivia",
-		url: "https://www.emblemtechnologies.com/portfolio/bbt",
-		subtitle: "Web portfolio",
-		actionText: "View portfolio"
-	}
-];
+import SkillsPills from '../components/portfolio/SkillsPills.astro';
+import PortfolioGridWithFilter from '../components/portfolio/PortfolioGridWithFilter.astro';
+import PortfolioCTA from '../components/portfolio/PortfolioCTA.astro';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Portfolio - Muhammad Minhaj Nadeem - Mobile Applications I've Built" />
+		<meta name="description" content="Portfolio - Muhammad Minhaj Nadeem - Native Android & Flutter mobile applications I've built and shipped." />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
 		<meta name="generator" content={Astro.generator} />
@@ -72,36 +28,25 @@ const apps = [
 			}
 
 			:root {
-				/* Color Palette */
 				--color-teal: #2f9983;
 				--color-navy: #1b3956;
 				--color-white: #f7f0f0;
 				--color-lavender: #A68FC8;
-				
-				/* Legacy variables for compatibility */
 				--color-primary: #1b3956;
 				--color-accent: #2f9983;
 				--color-text: #1b3956;
 				--color-text-light: #6b7280;
 				--color-bg: #f7f0f0;
 				--color-bg-light: #f7f0f0;
-				
-				/* Typography */
 				--font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-				
-				/* Spacing */
 				--spacing-xs: 0.5rem;
 				--spacing-sm: 1rem;
 				--spacing-md: 2rem;
 				--spacing-lg: 4rem;
 				--spacing-xl: 6rem;
-				
-				/* Border Radius */
 				--radius-sm: 0.375rem;
 				--radius-md: 0.5rem;
 				--radius-lg: 0.75rem;
-				
-				/* Shadows */
 				--shadow-sm: 0 1px 2px rgba(27, 57, 86, 0.05);
 				--shadow-md: 0 4px 6px rgba(27, 57, 86, 0.1);
 				--shadow-lg: 0 10px 25px rgba(27, 57, 86, 0.15);
@@ -134,14 +79,71 @@ const apps = [
 		<FloatingFollowBar />
 		<Header />
 		<main>
-			<Portfolio 
-				heroHeading={heroHeading}
-				heroSubheadline={heroSubheadline}
-				apps={apps}
-			/>
+			<section class="portfolio-hero-simple">
+				<div class="portfolio-hero-simple-container">
+					<h1 class="portfolio-hero-simple-heading">My Portfolio</h1>
+					<p class="portfolio-hero-simple-subheadline">
+						A curated selection of production mobile applications I've developed and maintained — spanning consumer marketplaces, e-commerce, education, health, entertainment, internal tools, and niche utilities.
+					</p>
+				</div>
+			</section>
+			<section class="portfolio-projects-section" id="projects">
+				<div class="portfolio-projects-container">
+					<h2 class="portfolio-projects-heading">Projects</h2>
+					<PortfolioGridWithFilter />
+				</div>
+			</section>
+			<PortfolioCTA />
+			<SkillsPills />
 		</main>
 		<Footer />
 		<ScrollToBottom />
 	</body>
 </html>
 
+<style>
+	.portfolio-hero-simple {
+		padding: 4rem 1.5rem 3rem;
+		background: var(--color-bg);
+		text-align: center;
+	}
+
+	.portfolio-hero-simple-container {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+
+	.portfolio-hero-simple-heading {
+		font-size: clamp(2rem, 5vw, 3rem);
+		font-weight: 800;
+		color: var(--color-navy);
+		margin: 0 0 1rem 0;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+	}
+
+	.portfolio-hero-simple-subheadline {
+		font-size: clamp(1rem, 2vw, 1.15rem);
+		color: var(--color-text-light);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.portfolio-projects-section {
+		padding: 2rem 1.5rem 4rem;
+		background: var(--color-bg);
+	}
+
+	.portfolio-projects-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.portfolio-projects-heading {
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-weight: 700;
+		color: var(--color-navy);
+		margin: 0 0 1.5rem 0;
+		text-align: center;
+	}
+</style>

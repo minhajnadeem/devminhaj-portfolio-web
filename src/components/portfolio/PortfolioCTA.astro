@@ -1,0 +1,106 @@
+---
+interface Props {
+	heading?: string;
+	subheading?: string;
+	primaryCtaText?: string;
+	primaryCtaHref?: string;
+	secondaryCtaText?: string;
+	secondaryCtaHref?: string;
+}
+const {
+	heading = "Let's build something great",
+	subheading = "Have a project in mind or want to discuss mobile development? I'd love to hear from you.",
+	primaryCtaText = "Get in touch",
+	primaryCtaHref = "/contact",
+	secondaryCtaText = "Start a project on Upwork",
+	secondaryCtaHref = "https://www.upwork.com/freelancers/~019ebe3add760ee109?s=996364627857502209",
+} = Astro.props;
+---
+
+<section class="portfolio-cta" id="contact-cta">
+	<div class="portfolio-cta-container">
+		<h2 class="portfolio-cta-heading">{heading}</h2>
+		<p class="portfolio-cta-subheading">{subheading}</p>
+		<div class="portfolio-cta-buttons">
+			<a href={primaryCtaHref} class="portfolio-cta-btn primary">
+				{primaryCtaText}
+			</a>
+			<a
+				href={secondaryCtaHref}
+				class="portfolio-cta-btn secondary"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				{secondaryCtaText}
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.portfolio-cta {
+		background: var(--color-navy, #1b3956);
+		color: #f7f0f0;
+		padding: 4rem 1.5rem;
+		text-align: center;
+	}
+
+	.portfolio-cta-container {
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.portfolio-cta-heading {
+		font-size: clamp(1.5rem, 4vw, 2rem);
+		font-weight: 700;
+		color: #f7f0f0;
+		margin: 0 0 0.75rem 0;
+		line-height: 1.3;
+	}
+
+	.portfolio-cta-subheading {
+		font-size: 1rem;
+		line-height: 1.6;
+		opacity: 0.9;
+		margin: 0 0 2rem 0;
+	}
+
+	.portfolio-cta-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.portfolio-cta-btn {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		transition: transform 0.2s ease, opacity 0.2s ease;
+	}
+
+	.portfolio-cta-btn.primary {
+		background: var(--color-teal, #2f9983);
+		color: #fff;
+	}
+
+	.portfolio-cta-btn.primary:hover {
+		background: #247a68;
+		transform: translateY(-2px);
+	}
+
+	.portfolio-cta-btn.secondary {
+		background: transparent;
+		color: #f7f0f0;
+		border: 2px solid rgba(247, 240, 240, 0.5);
+	}
+
+	.portfolio-cta-btn.secondary:hover {
+		border-color: #f7f0f0;
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+</style>
