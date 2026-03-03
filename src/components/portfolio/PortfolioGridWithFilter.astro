@@ -111,12 +111,13 @@ const { projects = portfolioProjects } = Astro.props;
 		}
 	}
 
-	/* Filter: show only matching cards (use :global so we match child component output) */
-	[data-portfolio-filter-wrapper][data-filter="native"] :global([data-project-type]:not([data-project-type="native"])) {
-		display: none;
+	/* Filter: hide non-matching cards completely (use :global so we match child component output).
+	   !important ensures this wins over ProjectCard's display: block so cards are fully hidden, not collapsed. */
+	[data-portfolio-filter-wrapper][data-filter="native"] :global(a[data-project-type]:not([data-project-type="native"])) {
+		display: none !important;
 	}
 
-	[data-portfolio-filter-wrapper][data-filter="flutter"] :global([data-project-type]:not([data-project-type="flutter"])) {
-		display: none;
+	[data-portfolio-filter-wrapper][data-filter="flutter"] :global(a[data-project-type]:not([data-project-type="flutter"])) {
+		display: none !important;
 	}
 </style>
