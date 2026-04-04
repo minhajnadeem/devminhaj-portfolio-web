@@ -10,15 +10,16 @@
 	.follow-bar {
 		position: fixed;
 		top: 50%;
-		right: 0;
+		left: 0;
+		right: auto;
 		transform: translateY(-50%);
 		width: 48px;
 		padding: 12px 8px;
-		padding-right: max(8px, env(safe-area-inset-right));
+		padding-left: max(8px, env(safe-area-inset-left));
 		background: #2f9983;
 		backdrop-filter: blur(8px);
-		border-radius: 12px 0 0 12px;
-		box-shadow: -2px 0 12px rgba(47, 153, 131, 0.35);
+		border-radius: 0 12px 12px 0;
+		box-shadow: 2px 0 12px rgba(47, 153, 131, 0.35);
 		z-index: 900;
 		display: flex;
 		align-items: center;
@@ -46,9 +47,14 @@
 
 	@media (min-width: 769px) {
 		.follow-bar {
+			left: auto;
+			right: 0;
 			width: 52px;
 			padding: 16px 10px;
+			padding-left: 10px;
 			padding-right: max(10px, env(safe-area-inset-right));
+			border-radius: 12px 0 0 12px;
+			box-shadow: -2px 0 12px rgba(47, 153, 131, 0.35);
 		}
 
 		.follow-bar-label {

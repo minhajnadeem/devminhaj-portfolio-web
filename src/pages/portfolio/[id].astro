@@ -23,6 +23,11 @@ const introImages = imageUrls.slice(0, 2);
 const remainingImages = imageUrls.slice(2);
 const typeLabel = project.type === "native" ? "Native Android" : "Cross-Platform Flutter";
 
+/** Every entry is a Google Play listing — use a compact multi-app block instead of the generic Links layout */
+function linksAreAllPlayStore(links: { label: string; url: string }[]) {
+	return links.length > 0 && links.every((l) => l.url.includes("play.google.com"));
+}
+
 /** Categorize links for "Available on" and primary CTA */
 function getLinkCategories(links: { label: string; url: string }[]) {
 	const playStore = links.find((l) => l.label.toLowerCase().includes("play store") || l.url.includes("play.google.com"));
@@ -34,7 +39,11 @@ function getLinkCategories(links: { label: string; url: string }[]) {
 	const otherLinks = links.filter((l) => !shownUrls.has(l.url));
 	return { playStore, appStore, website, primaryLink, otherLinks, all: links };
 }
-const linkCategories = project.links?.length ? getLinkCategories(project.links) : null;
+
+const detailLinks = project.links ?? [];
+const playStoreAppsOnly = detailLinks.length > 0 && linksAreAllPlayStore(detailLinks);
+const linkCategories =
+	detailLinks.length > 0 && !playStoreAppsOnly ? getLinkCategories(detailLinks) : null;
 ---
 
 <!doctype html>
@@ -183,8 +192,29 @@ const linkCategories = project.links?.length ? getLinkCategories(project.links) 
 					</section>
 				)}
 
-				<!-- Result / Links -->
-				{project.links && project.links.length > 0 && (
+				<!-- Google Play: multiple app listings (e.g. product flavors) -->
+				{playStoreAppsOnly && (
+					<section class="project-detail-result" aria-labelledby="google-play-heading">
+						<h2 id="google-play-heading" class="project-detail-section-title">Google Play</h2>
+						<div class="project-detail-store-btns">
+							{detailLinks.map((link) => (
+								<a
+									href={link.url}
+									class="project-detail-store-btn"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`${link.label} on Google Play`}
+								>
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.302 2.302-8.636-8.636z"/></svg>
+									{link.label}
+								</a>
+							))}
+						</div>
+					</section>
+				)}
+
+				<!-- Result / Links (website + store mixes, App Store, etc.) -->
+				{detailLinks.length > 0 && !playStoreAppsOnly && (
 					<section class="project-detail-result" aria-labelledby="links-heading">
 						<h2 id="links-heading" class="project-detail-section-title">Links</h2>
 						{linkCategories?.primaryLink && (
@@ -233,15 +263,6 @@ const linkCategories = project.links?.length ? getLinkCategories(project.links) 
 					</section>
 				)}
 			</div>
-
-			<!-- CTA strip -->
-			<section class="project-detail-cta">
-				<div class="project-detail-cta-inner">
-					<p class="project-detail-cta-title">Have a project in mind?</p>
-					<p class="project-detail-cta-sub">Let's build something great together.</p>
-					<a href="/contact" class="project-detail-cta-button">Get in touch</a>
-				</div>
-			</section>
 
 			<!-- Lightbox for full-size screenshots -->
 			<div id="project-lightbox" class="project-detail-lightbox" role="dialog" aria-modal="true" aria-label="Screenshot full size" hidden>
@@ -668,43 +689,6 @@ const linkCategories = project.links?.length ? getLinkCategories(project.links) 
 	.project-detail-link-btn:hover {
 		background: rgba(47, 153, 131, 0.25);
 		border-color: var(--color-teal);
-	}
-
-	/* —— CTA strip —— */
-	.project-detail-cta {
-		background: var(--color-navy);
-		color: #f7f0f0;
-		padding: 3rem 1.5rem;
-		text-align: center;
-	}
-	.project-detail-cta-inner {
-		max-width: 560px;
-		margin: 0 auto;
-	}
-	.project-detail-cta-title {
-		font-size: 1.5rem;
-		font-weight: 700;
-		margin: 0 0 0.25rem 0;
-	}
-	.project-detail-cta-sub {
-		font-size: 1rem;
-		opacity: 0.9;
-		margin: 0 0 1.5rem 0;
-	}
-	.project-detail-cta-button {
-		display: inline-block;
-		padding: 0.75rem 1.75rem;
-		background: var(--color-teal);
-		color: #fff;
-		font-weight: 600;
-		font-size: 1rem;
-		text-decoration: none;
-		border-radius: 8px;
-		transition: background 0.2s ease, transform 0.2s ease;
-	}
-	.project-detail-cta-button:hover {
-		background: #247a68;
-		transform: translateY(-2px);
 	}
 
 	/* —— Lightbox —— */
