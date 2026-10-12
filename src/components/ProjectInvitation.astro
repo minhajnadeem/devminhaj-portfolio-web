@@ -1,1 +1,8 @@
-<section class="section cta"><div class="container"><span class="eyebrow">Have something in mind?</span><h2>Let’s build what your<br/>business needs next.</h2><p class="lead">Bring an idea, a workflow, or a product that needs to grow. We’ll start with the problem you want to solve.</p><div class="actions"><a class="button" href="/contact">Discuss your project ↗</a></div></div></section>
+---
+import { contactDetails } from '../data/contact';
+interface Props { project?: string; }
+const { project } = Astro.props;
+const contactUrl = project ? `/contact?project=${encodeURIComponent(project)}` : '/contact';
+---
+<section class="section cta"><div class="container"><span class="eyebrow">Have something in mind?</span><h2>Let’s build what your<br/>business needs next.</h2><p class="lead">We’ll discuss your users, essential workflows, and launch goals, then identify a practical next step.</p><div class="actions"><a class="button" href={contactUrl}>Discuss your project ↗</a></div><p class="response-note">{contactDetails.response}</p></div></section>
+<style>.response-note{margin:16px 0 0;font-size:.85rem;color:var(--color-text-light)}</style>

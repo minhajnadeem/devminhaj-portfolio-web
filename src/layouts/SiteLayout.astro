@@ -1,11 +1,55 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FloatingFollowBar from '../components/FloatingFollowBar.astro';
 import ScrollToBottom from '../components/ScrollToBottom.astro';
+import { socialLinks } from '../data/social';
 import '../styles/global.css';
 interface Props { title: string; description?: string; }
-const { title, description = 'Minhaj is an independent product engineer building connected apps, websites, admin systems, backends, and cloud deployments for founders and businesses.' } = Astro.props;
+const { title, description = 'Minhaj is an independent product engineer helping founders and service businesses build customer apps, operational dashboards, and connected backends—from planning through deployment.' } = Astro.props;
+const pageTitle = `${title} — Minhaj Nadeem`;
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.site);
+const image = new URL('/assets/profile_img.jpg', Astro.site);
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Muhammad Minhaj Nadeem',
+  jobTitle: 'Independent Product Engineer',
+  url: Astro.site?.href,
+  image: image.href,
+  sameAs: [socialLinks.linkedin, socialLinks.github],
+};
 ---
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><link rel="icon" href="/favicon.jpg" /><title>{title} — Minhaj Nadeem</title><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /></head><body><a class="skip-link" href="#main">Skip to content</a><FloatingFollowBar /><Header /><main id="main"><slot /></main><Footer /><ScrollToBottom /></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.jpg" />
+    <link rel="canonical" href={canonical} />
+    <title>{pageTitle}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Minhaj Nadeem" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content="Muhammad Minhaj Nadeem" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <script type="application/ld+json" set:html={JSON.stringify(person).replace(/</g, '\\u003c')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+    <ScrollToBottom />
+    <script>import '../scripts/lead-intent';</script>
+  </body>
+</html>

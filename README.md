@@ -41,3 +41,15 @@ case study. The dynamic project route renders standard projects only; `caseStudy
 
 The Contact page offers direct email, WhatsApp, and Upwork links. It has no
 submission form and does not store enquiries.
+
+## Lead-focused experience
+
+The site uses the production URL `https://www.devminhaj.me/` for canonical and
+sharing metadata, a generated sitemap, and robots.txt. Contact links prepare a
+message and preserve known case-study or service context without a form.
+The response promise is maintained in `src/data/contact.ts`.
+
+No analytics provider is configured. In-memory contact-intent hooks are ready
+for a future provider; they do not send requests or persist click data.
+See `LEAD_GENERATION.md` for acquisition experiments, enquiry handling,
+measurement, and remaining evidence to collect.

@@ -1,49 +1,97 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { socialLinks } from '../data/social';
+import { portfolioProjects } from '../data/portfolio';
+import { contactDetails, enquiryLinks } from '../data/contact';
+const links = enquiryLinks();
 ---
 
-<SiteLayout title="Discuss your project">
+<SiteLayout title="Discuss your project" description="Discuss your app, marketplace, or business platform with Minhaj Nadeem. Direct email and WhatsApp enquiries, with replies within one hour during business hours.">
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Start a conversation</span>
       <h1>What does your<br />business need next?</h1>
       <p class="lead">Tell me what you want to launch or improve. You don’t need a technical specification to start.</p>
+      <div class="actions contact-hero-actions">
+        <a class="button" data-enquiry-channel="email" href={links.email}>Discuss by email ↗</a>
+        <a class="button secondary" data-enquiry-channel="whatsapp" href={links.whatsapp} target="_blank" rel="noopener noreferrer">Discuss on WhatsApp ↗</a>
+      </div>
+      <p class="response-note">{contactDetails.response} Business hours follow Pakistan time (UTC+5). Working remotely.</p>
+      <p id="project-reference" class="context-note" hidden></p>
     </div>
   </section>
   <section class="section">
     <div class="container contact-grid">
       <div>
-        <h2>Let’s start with<br />the problem.</h2>
-        <p class="muted">Get in touch through email, WhatsApp, or Upwork. Share a little about your business, what you want to build, and your preferred timeline.</p>
+        <h2>A useful first discussion.</h2>
+        <p class="muted">We’ll talk about your users, essential workflows, and launch goals, then identify a practical next step. Email or WhatsApp both work—choose what’s easiest for you.</p>
+        <h3>A few details help us start</h3>
+        <ul class="list">
+          <li>What your business does and who the product is for.</li>
+          <li>What you want to launch or improve.</li>
+          <li>Your preferred timeline.</li>
+          <li>A budget range, if you have one. “Need guidance” is fine.</li>
+        </ul>
         <h3>What happens next?</h3>
-        <p class="muted">I’ll review your enquiry and follow up to arrange a discussion if the project fits. We’ll clarify the scope and decide on a useful next step.</p>
+        <p class="muted">I’ll review your enquiry and follow up to arrange a discussion if the project fits. We’ll clarify the scope and decide whether the next step is planning, a focused improvement, or a build.</p>
       </div>
-      <div class="contact-channels" aria-label="Ways to get in touch">
+      <div class="contact-channels" data-project-names={JSON.stringify(portfolioProjects.map((project) => project.name))} data-contact-context aria-label="Ways to get in touch">
         <article class="card">
           <h3>Email me directly</h3>
-          <p>For project enquiries and proposals.</p>
-          <a class="text-link" href="mailto:minhaj.lib@gmail.com">minhaj.lib@gmail.com ↗</a>
+          <p>For your idea, project brief, or an existing product that needs work.</p>
+          <a class="button" id="project-email" data-enquiry-channel="email" href={links.email}>Start an email ↗</a>
+          <p class="channel-detail">{contactDetails.email}</p>
         </article>
         <article class="card">
           <h3>Talk on WhatsApp</h3>
-          <p>Start a conversation about your idea or existing product.</p>
-          <a class="text-link" href="https://wa.me/923346241289" target="_blank" rel="noopener noreferrer">+92 334 6241289 ↗</a>
+          <p>A convenient way to start the same project discussion.</p>
+          <a class="button" id="project-whatsapp" data-enquiry-channel="whatsapp" href={links.whatsapp} target="_blank" rel="noopener noreferrer">Start a conversation ↗</a>
+          <p class="channel-detail">{contactDetails.whatsappDisplay}</p>
         </article>
-        <article class="card">
-          <h3>Prefer Upwork?</h3>
-          <p>Discuss and manage your engagement through Upwork.</p>
-          <a class="text-link" href={socialLinks.upwork} target="_blank" rel="noopener noreferrer">View my Upwork profile ↗</a>
-        </article>
+        <p class="upwork-alternative">Prefer to manage the engagement through Upwork? <a class="text-link" href={socialLinks.upwork} target="_blank" rel="noopener noreferrer">View my profile ↗</a></p>
       </div>
     </div>
   </section>
 </SiteLayout>
+
+<script>
+  import { enquiryLinks } from '../data/contact';
+  const params = new URLSearchParams(window.location.search);
+  // Accept known catalog names only; arbitrary query text never enters analytics.
+  const projectNames: string[] = JSON.parse(document.querySelector<HTMLElement>('[data-project-names]')?.dataset.projectNames ?? '[]');
+  const project = projectNames.find((name) => name === params.get('project'));
+  const services: Record<string, string> = {
+    launch: 'Launching a new product',
+    platform: 'Building a business platform',
+    improve: 'Improving an existing product',
+    discovery: 'Discovery and planning',
+  };
+  const serviceKey = params.get('service') ?? '';
+  const service = Object.hasOwn(services, serviceKey) ? services[serviceKey] : undefined;
+  const context = project ?? service;
+  if (context) {
+    const links = enquiryLinks(context);
+
+    const note = document.getElementById('project-reference');
+    const channels = document.querySelector<HTMLElement>('[data-contact-context]');
+    document.querySelectorAll<HTMLAnchorElement>('[data-enquiry-channel="email"]').forEach((link) => { link.href = links.email; });
+    document.querySelectorAll<HTMLAnchorElement>('[data-enquiry-channel="whatsapp"]').forEach((link) => { link.href = links.whatsapp; });
+    if (note) { note.textContent = `Let’s discuss: ${context}`; note.hidden = false; }
+    if (channels && project) channels.dataset.project = project;
+    if (channels && !project && service) channels.dataset.service = service;
+  }
+</script>
 
 <style>
   .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
   .contact-channels { display: grid; gap: 24px; min-width: 0; }
   .contact-channels h3 { margin-top: 0; }
   .contact-channels .text-link { overflow-wrap: anywhere; }
+  .channel-detail { margin: 16px 0 0; font-size: .85rem; overflow-wrap: anywhere; }
+  .response-note { margin-top: 20px; font-size: .9rem; color: var(--color-navy); margin-bottom: 0; }
+  .context-note { margin: 20px 0 0; color: var(--color-teal); font-weight: 600; }
+  .upwork-alternative { color: var(--color-text-light); font-size: .9rem; }
+  .contact-hero-actions { margin-top: 24px; }
   @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 600px) { .contact-channels .button { width: 100%; padding: 1rem; } }
 </style>
