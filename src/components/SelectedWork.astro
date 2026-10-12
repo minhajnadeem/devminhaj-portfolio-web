@@ -1,0 +1,6 @@
+---
+import {getProjectById,getProjectImages} from '../data/portfolio';
+const projects=['hifz-diary','maxximus','sf-gas-works'].map(id=>getProjectById(id)!);
+const scopes:Record<string,string>={'hifz-diary':'Solo ownership of the multi-app product, including architecture, database and UI design, and release.','maxximus':'End-to-end Flutter app development, architectural leadership, and third-party integrations.','sf-gas-works':'Android app development, database structure, and solution architecture.'};
+---
+<div class="grid">{projects.map(p=><article class="project-card"><a href={`/portfolio/${p.id}`}><div class="project-image">{getProjectImages(p)[0]?<img src={getProjectImages(p)[0]} alt={`${p.name} application preview`} loading="lazy"/>:<span>Maxximus / AI-powered marketplace</span>}</div><h3>{p.name} ↗</h3></a><p>{p.description}</p><p><strong>My responsibility:</strong> {scopes[p.id]}</p></article>)}</div>

@@ -403,3 +403,6 @@ FodyWeavers.xsd
 # Project-specific ignores
 docs/
 content/
+# Astro build output and generated types
+dist/
+.astro/content.d.ts

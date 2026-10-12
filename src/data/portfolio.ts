@@ -26,6 +26,8 @@ export interface PortfolioProject {
 	roleSnippet?: string;
 	achievementSnippet?: string;
 	featured: boolean;
+	/** Editorial page format; independent of homepage selection. */
+	caseStudyKind?: "standard" | "featured";
 	/** e.g. "Delisted" - shown as note */
 	note?: string;
 	/** Detail page: key features list */
@@ -42,6 +44,7 @@ export interface PortfolioProject {
 export const PORTFOLIO_ASSETS_BASE = "/assets/portfolio";
 
 const projects: PortfolioProject[] = [
+ { id: "sdrive", caseStudyKind: "featured", name: "SDrive", slug: "sdrive", type: "flutter", pitch: "A complete ride-hailing platform connecting riders, drivers, and business operations.", description: "Independently developed and delivered a ride-hailing solution with rider and driver Flutter apps, a marketing website, an administration portal, backend, and cloud deployment.", tech: ["Flutter", "Product Delivery"], url: "https://sdrive.africa/", linkLabel: "Website", images: [], roleSnippet: "Sole developer across the connected platform, from implementation through cloud deployment.", featured: true, role: ["Rider and driver app development", "Marketing website and administration portal", "Backend and cloud deployment"], links: [{ label: "Website", url: "https://sdrive.africa/" }] },
 	// —— Native Android ——
 	{
 		id: "twidlee",

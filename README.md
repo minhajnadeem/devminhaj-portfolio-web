@@ -15,3 +15,29 @@ My portfolio website
 ## Let's Connect
 - **YouTube:** [youtube.com/@devminhaj_me](https://www.youtube.com/@devminhaj_me)
 - **Instagram:** [instagram.com/devminhaj](https://www.instagram.com/devminhaj/)
+
+## Development
+
+```sh
+npm ci
+npm run dev
+npm run build
+npm run preview
+```
+
+## Revamped site
+
+The Astro site is statically generated. Pages share `src/layouts/SiteLayout.astro`
+and `src/styles/global.css`. The main routes are Home, Services, Work (`/portfolio`),
+About, and Discuss a Project (`/contact`). Existing project URLs are preserved.
+
+Project content lives in `src/data/portfolio.ts`; skills and social links live in
+`src/data/skills.ts` and `src/data/social.ts`.
+
+SDrive has a dedicated route at `/portfolio/sdrive`. Its illustrations are labeled
+placeholders in `src/components/SDriveVisual.astro`. Replace them with approved
+screenshots when available; add confirmed public links and stack details to the
+case study. The dynamic project route renders standard projects only; `caseStudyKind: "featured"` selects dedicated editorial pages such as SDrive. Standard stories live in `src/data/caseStudies.ts`.
+
+The Contact page offers direct email, WhatsApp, and Upwork links. It has no
+submission form and does not store enquiries.
