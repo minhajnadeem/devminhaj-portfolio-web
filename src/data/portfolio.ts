@@ -464,10 +464,27 @@ const projects: PortfolioProject[] = [
 	},
 ];
 
-export const portfolioProjects = projects;
-export const featuredProjects = projects.filter((p) => p.featured);
-export const nativeProjects = projects.filter((p) => p.type === "native");
-export const flutterProjects = projects.filter((p) => p.type === "flutter");
+/** Shared display order; unlisted projects retain their existing relative order. */
+export const showcasePriority = [
+  "sdrive",
+  "badminton-famly",
+  "twidlee",
+  "hifz-diary",
+  "maxximus",
+  "final-touch",
+  "terragrow",
+  "speedfame-tv",
+  "bbm",
+] as const;
+
+const showcaseRank = new Map<string, number>(showcasePriority.map((id, index) => [id, index]));
+export const portfolioProjects = [...projects].sort((a, b) =>
+  (showcaseRank.get(a.id) ?? showcasePriority.length) -
+  (showcaseRank.get(b.id) ?? showcasePriority.length)
+);
+export const featuredProjects = portfolioProjects.filter((p) => p.featured);
+export const nativeProjects = portfolioProjects.filter((p) => p.type === "native");
+export const flutterProjects = portfolioProjects.filter((p) => p.type === "flutter");
 
 export function getProjectImages(project: PortfolioProject): string[] {
 	if (!project.images.length) return [];
