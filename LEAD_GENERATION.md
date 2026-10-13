@@ -3,6 +3,14 @@
 The website is the place where prospects evaluate the offer and begin a conversation.
 Use it with consistent distribution; the site alone does not supply qualified traffic.
 
+## Positioning
+
+Full Stack Product Engineer. I build and deploy complete software solutions for
+businesses, owning technical delivery across mobile, web, admin, backend, and cloud.
+The client supplies business requirements and owns market and product decisions.
+Technical consulting covers feasibility, architecture, integrations, and implementation
+tradeoffs; it does not include market research or business-idea validation.
+
 ## Starting audience
 
 Founders and service businesses that need customer applications connected to
@@ -38,7 +46,7 @@ availability schedule. The site does not invent those hours.
 
 When an enquiry arrives, establish the business need, users, scope, current
 software, timeline, budget range (or need for guidance), and decision-maker.
-Then agree whether to discuss a focused engagement, a build, or paid discovery.
+Then agree on the technical scope, implementation approach, dependencies, and estimate for a build, focused development, or technical consulting.
 
 ## Manual pipeline
 

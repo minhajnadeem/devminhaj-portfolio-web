@@ -1,5 +1,5 @@
 # devminhaj-portfolio-web
-My portfolio website
+My portfolio website, positioned around Full Stack Product Engineering and complete technical delivery across mobile, web, admin systems, backend, and cloud deployment.
 
 ## Portfolio (Google Play)
 - [Maxximus](https://play.google.com/store/apps/details?id=uk.maxximus.app)

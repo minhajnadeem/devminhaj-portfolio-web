@@ -2,22 +2,22 @@
 interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 const questions = [
-  { question: 'Is my project a good fit?', answer: 'My focus is software connecting customers, providers, and business operations: marketplaces, booking services, transport, delivery, and education. I also take focused Flutter and Android engagements. We’ll discuss your scope, dependencies, and whether specialist input is needed before agreeing on the work.' },
-  { question: 'What happens in our first discussion?', answer: 'We’ll talk through your business, the people using the product, essential workflows, and your launch goals. The next step may be a scoped build, a focused improvement, or paid discovery for a more complex project.' },
-  { question: 'How are scope and cost agreed?', answer: 'We clarify the first release and its deliverables before estimating the build. For complex projects, discovery defines workflows, milestones, dependencies, and an estimate. The discovery fee and deliverables are agreed before it begins.' },
-  { question: 'How will I see progress?', answer: 'Work is organized into reviewable milestones, with demonstrations of the relevant product journeys. We agree on the review schedule and communication channel for the engagement.' },
-  { question: 'What if requirements change?', answer: 'We review the change against the agreed scope and discuss its effect on the estimate and delivery plan before including it in the work.' },
+  { question: 'What technical work can you take on?', answer: 'I build complete software solutions across mobile apps, websites, admin panels, backend systems, and cloud deployment. I also take focused development and technical consulting engagements. We review your requirements and dependencies to agree on the work I’ll own.' },
+  { question: 'What happens in our first discussion?', answer: 'We review your software requirements, user workflows, existing systems, integrations, and deployment needs. The discussion defines the technical scope and delivery approach for implementation or technical consulting.' },
+  { question: 'How are scope and cost agreed?', answer: 'We define the technical deliverables before estimating the build. For complex work, technical scoping covers architecture, integration dependencies, implementation milestones, and an estimate. The scope and any scoping fee are agreed before work begins.' },
+  { question: 'How will I see progress?', answer: 'Implementation is organized into reviewable milestones, with demonstrations of working features and connected systems. We agree on the review schedule and communication channel for the engagement.' },
+  { question: 'What if requirements change?', answer: 'We review the change against the agreed technical scope and discuss its effect on the estimate and delivery plan before including it in the work.' },
   { question: 'Who controls the code and accounts?', answer: 'Source code handover, access to hosting and service accounts, and ownership terms are agreed as part of the engagement. We discuss these details before the build begins.' },
-  { question: 'Are hosting and third-party services included?', answer: 'Hosting, app-store accounts, paid APIs, and subscriptions can carry separate costs. We identify the services the product needs and agree how those costs and accounts will be handled.' },
-  { question: 'What happens after delivery?', answer: 'Handover and any post-launch maintenance or support are scoped as part of the project. We agree on what is included and how ongoing work will be handled.' },
+  { question: 'Are hosting and third-party services included?', answer: 'Hosting, app-store accounts, paid APIs, and subscriptions can carry separate costs. We identify the services the software needs and agree how those costs and accounts will be handled.' },
+  { question: 'What happens after delivery?', answer: 'Handover and any post-deployment maintenance or support are scoped as part of the project. We agree on what is included and how ongoing technical work will be handled.' },
 ];
 ---
 <section class="section engagement-faq" aria-labelledby="engagement-heading">
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">Before we start</span>
-      <h2 id="engagement-heading">Clear expectations.<br />A practical first step.</h2>
-      <p class="lead">Understand how we can work together before you commit to a build.</p>
+      <h2 id="engagement-heading">Clear expectations.<br />A defined technical scope.</h2>
+      <p class="lead">Understand the implementation process, delivery scope, and handover before the work begins.</p>
     </div>
     <div class="faq-list">
       {questions.slice(0, compact ? 4 : undefined).map(({question, answer}) => (

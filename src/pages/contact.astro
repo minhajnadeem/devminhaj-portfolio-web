@@ -11,7 +11,7 @@ const links = enquiryLinks();
     <div class="container">
       <span class="eyebrow">Start a conversation</span>
       <h1>What does your<br />business need next?</h1>
-      <p class="lead">Tell me what you want to launch or improve. You don’t need a technical specification to start.</p>
+      <p class="lead">Tell me what software you need built or improved. We can clarify the technical requirements together.</p>
       <div class="actions contact-hero-actions">
         <a class="button" data-enquiry-channel="email" href={links.email}>Discuss by email ↗</a>
         <a class="button secondary" data-enquiry-channel="whatsapp" href={links.whatsapp} target="_blank" rel="noopener noreferrer">Discuss on WhatsApp ↗</a>
@@ -23,22 +23,22 @@ const links = enquiryLinks();
   <section class="section">
     <div class="container contact-grid">
       <div>
-        <h2>A useful first discussion.</h2>
-        <p class="muted">We’ll talk about your users, essential workflows, and launch goals, then identify a practical next step. Email or WhatsApp both work—choose what’s easiest for you.</p>
+        <h2>Discuss the technical delivery.</h2>
+        <p class="muted">We’ll review your requirements, existing systems, integrations, and deployment needs, then discuss the technical scope and delivery approach. Email or WhatsApp both work—choose what’s easiest for you.</p>
         <h3>A few details help us start</h3>
         <ul class="list">
           <li>What your business does and who the product is for.</li>
-          <li>What you want to launch or improve.</li>
+          <li>What software you need built or improved.</li>
           <li>Your preferred timeline.</li>
           <li>A budget range, if you have one. “Need guidance” is fine.</li>
         </ul>
         <h3>What happens next?</h3>
-        <p class="muted">I’ll review your enquiry and follow up to arrange a discussion if the project fits. We’ll clarify the scope and decide whether the next step is planning, a focused improvement, or a build.</p>
+        <p class="muted">I’ll review your enquiry and follow up to arrange a discussion if the project fits. We’ll clarify the technical scope, dependencies, and estimate for implementation or technical consulting.</p>
       </div>
       <div class="contact-channels" data-project-names={JSON.stringify(portfolioProjects.map((project) => project.name))} data-contact-context aria-label="Ways to get in touch">
         <article class="card">
           <h3>Email me directly</h3>
-          <p>For your idea, project brief, or an existing product that needs work.</p>
+          <p>For your software requirements, project brief, or existing product.</p>
           <a class="button" id="project-email" data-enquiry-channel="email" href={links.email}>Start an email ↗</a>
           <p class="channel-detail">{contactDetails.email}</p>
         </article>
@@ -61,10 +61,11 @@ const links = enquiryLinks();
   const projectNames: string[] = JSON.parse(document.querySelector<HTMLElement>('[data-project-names]')?.dataset.projectNames ?? '[]');
   const project = projectNames.find((name) => name === params.get('project'));
   const services: Record<string, string> = {
-    launch: 'Launching a new product',
-    platform: 'Building a business platform',
+    launch: 'Building a complete software solution',
+    platform: 'Developing an app or system',
     improve: 'Improving an existing product',
-    discovery: 'Discovery and planning',
+    scoping: 'Technical scoping and implementation planning',
+    discovery: 'Technical scoping and implementation planning',
   };
   const serviceKey = params.get('service') ?? '';
   const service = Object.hasOwn(services, serviceKey) ? services[serviceKey] : undefined;

@@ -100,7 +100,7 @@ export const standardCaseStudies: Record<string, StandardCaseStudy> = {
     category: "Business operations",
     businessNeed: "Madarsa owners, teachers, and parents need connected tools for attendance, student progress, and fee management, with experiences suited to each role.",
     scope: "Solo ownership from concept through app launch",
-    responsibility: "I owned the multi-app delivery, including architecture, database and UI/UX design, client consultancy, and Play Console publication.",
+    responsibility: "I owned the multi-app delivery, including architecture, database and UI/UX design, technical client consultancy, and Play Console publication.",
     solution: "Role-specific Flutter apps share a product foundation using Riverpod, Clean Architecture, product flavors, and Firebase. The suite brings attendance, reports, and fee notifications into connected experiences.",
     outcome: "Delivered the Owner, Teacher, and Parent app suite from concept through publication.",
   },

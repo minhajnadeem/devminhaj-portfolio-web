@@ -5,7 +5,7 @@ import ScrollToBottom from '../components/ScrollToBottom.astro';
 import { socialLinks } from '../data/social';
 import '../styles/global.css';
 interface Props { title: string; description?: string; }
-const { title, description = 'Minhaj is an independent product engineer helping founders and service businesses build customer apps, operational dashboards, and connected backends—from planning through deployment.' } = Astro.props;
+const { title, description = 'Minhaj is a Full Stack Product Engineer building complete software solutions for businesses: mobile apps, websites, admin panels, backend systems, and cloud deployment.' } = Astro.props;
 const pageTitle = `${title} — Minhaj Nadeem`;
 const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.site);
 const image = new URL('/assets/profile_img.jpg', Astro.site);
@@ -13,7 +13,7 @@ const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Muhammad Minhaj Nadeem',
-  jobTitle: 'Independent Product Engineer',
+  jobTitle: 'Full Stack Product Engineer',
   url: Astro.site?.href,
   image: image.href,
   sameAs: [socialLinks.linkedin, socialLinks.github],
