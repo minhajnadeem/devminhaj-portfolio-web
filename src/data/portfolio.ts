@@ -2,7 +2,7 @@
  * Portfolio projects derived from content/portfolio.md.
  * slug maps to public/assets/portfolio/{slug}/ for screenshots.
  */
-export type ProjectType = "native" | "flutter";
+export type ProjectType = "native" | "flutter" | "web";
 
 export interface ProjectLink {
 	label: string;
@@ -23,6 +23,7 @@ export interface PortfolioProject {
 	urlSecondary?: string;
 	linkLabelSecondary?: string;
 	images: string[];
+	imageCaptions?: string[];
 	roleSnippet?: string;
 	achievementSnippet?: string;
 	featured: boolean;
@@ -56,7 +57,8 @@ const projects: PortfolioProject[] = [
 		tech: ["Flutter", "Google Cloud", "Technical Delivery"],
 		url: "https://sdrive.africa/",
 		linkLabel: "Website",
-		images: [],
+		images: ["driver/sdrive_driver.png"],
+		imageCaptions: ["App registration, maps, wallet, and profile"],
 		roleSnippet:
 			"Sole developer across the connected platform, from implementation through cloud deployment.",
 		featured: true,
@@ -66,6 +68,34 @@ const projects: PortfolioProject[] = [
 			"Backend and Google Cloud deployment",
 		],
 		links: [{ label: "Website", url: "https://sdrive.africa/" }],
+	},
+
+	{
+		id: "vbay",
+		name: "VBay",
+		slug: "vbay",
+		type: "web",
+		pitch: "A static ecommerce storefront with product browsing and WhatsApp ordering.",
+		description:
+			"A mobile-friendly static storefront for browsing products and starting an order through WhatsApp. I built and deployed the website.",
+		tech: ["React", "Next.js", "Astro", "Vercel"],
+		url: "https://vbay.pk/",
+		linkLabel: "Website",
+		images: ["vbay.png", "vbay_2.png"],
+		imageCaptions: [
+			"Mobile storefront, product browsing, and WhatsApp ordering",
+			"Desktop product catalog, storefront sections, and ordering guide",
+		],
+		roleSnippet: "Website development and deployment.",
+		achievementSnippet: "Built and deployed the live static storefront at vbay.pk.",
+		featured: false,
+		keyFeatures: [
+			"Product catalog and detail pages",
+			"Direct WhatsApp ordering",
+			"Mobile and desktop layouts",
+		],
+		role: ["Built the static ecommerce website", "Deployed the website"],
+		links: [{ label: "Website", url: "https://vbay.pk/" }],
 	},
 	// —— Native Android ——
 	{
@@ -362,7 +392,8 @@ const projects: PortfolioProject[] = [
 		linkLabel: "View on Play Store",
 		urlSecondary: "https://maxximus.uk/",
 		linkLabelSecondary: "Website",
-		images: [],
+		images: ["maxximus.png"],
+		imageCaptions: ["AI service search, bookings, payments, and order tracking"],
 		roleSnippet:
 			"End-to-end development from scratch; architectural leadership, code reviews, sprint planning.",
 		achievementSnippet:
@@ -570,6 +601,7 @@ export const portfolioProjects = [...projects].sort(
 export const featuredProjects = portfolioProjects.filter((p) => p.featured);
 export const nativeProjects = portfolioProjects.filter((p) => p.type === "native");
 export const flutterProjects = portfolioProjects.filter((p) => p.type === "flutter");
+export const webProjects = portfolioProjects.filter((p) => p.type === "web");
 
 export function getProjectImages(project: PortfolioProject): string[] {
 	if (!project.images.length) return [];
@@ -579,4 +611,9 @@ export function getProjectImages(project: PortfolioProject): string[] {
 
 export function getProjectById(id: string): PortfolioProject | undefined {
 	return portfolioProjects.find((p) => p.id === id);
+}
+
+export function getProjectPlatform(project: PortfolioProject): string {
+	if (project.id === "speedfame-tv") return "Android TV";
+	return { native: "Native Android", flutter: "Flutter", web: "Web" }[project.type];
 }

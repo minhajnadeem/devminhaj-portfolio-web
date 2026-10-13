@@ -90,7 +90,7 @@ or click history will exist from the unconfigured hooks.
 
 ## Evidence to collect next
 
-- An approved SDrive delivery testimonial and product screenshots/walkthrough.
+- An approved SDrive delivery testimonial and additional rider, admin, and website screenshots or a walkthrough. The supplied app collage is already displayed.
 - Verified names, roles, and relationships for existing recommendations.
 - Exact business hours and working days for the response-time promise.
 - Actual ownership, support, handover, and cost terms for written engagements.

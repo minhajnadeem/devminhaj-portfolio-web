@@ -8,6 +8,18 @@ export interface StandardCaseStudy {
 }
 
 export const standardCaseStudies: Record<string, StandardCaseStudy> = {
+	vbay: {
+		category: "Websites & commerce",
+		businessNeed:
+			"VBay needed an online storefront where customers could browse its products and contact the business to place an order.",
+		scope: "Static ecommerce website development and deployment",
+		responsibility:
+			"I built the website using React, Next.js, and Astro, and deployed it on Vercel at vbay.pk.",
+		solution:
+			"The website presents a product catalog and detail pages across mobile and desktop layouts. Customers move from browsing to a WhatsApp conversation to confirm their order; checkout is handled in chat.",
+		outcome:
+			"Delivered the live static ecommerce storefront with product browsing and direct WhatsApp ordering.",
+	},
 	twidlee: {
 		category: "Marketplaces & services",
 		businessNeed:

@@ -1,6 +1,11 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { getProjectById, getProjectImages, portfolioProjects } from '../../data/portfolio';
+import {
+	getProjectById,
+	getProjectImages,
+	getProjectPlatform,
+	portfolioProjects,
+} from '../../data/portfolio';
 import { standardCaseStudies } from '../../data/caseStudies';
 
 export function getStaticPaths() {
@@ -15,12 +20,7 @@ const story = standardCaseStudies[project.id];
 if (!story) throw new Error(`Missing standard case study: ${project.id}`);
 const imageUrls = getProjectImages(project);
 const links = project.links ?? [];
-const platform =
-	project.id === 'speedfame-tv'
-		? 'Android TV'
-		: project.type === 'native'
-			? 'Native Android'
-			: 'Flutter';
+const platform = getProjectPlatform(project);
 const archive = ['bbm', 'beat-bully-trivia', 'whatsapp-sticker'].includes(project.id);
 const internal = ['sf-gas-works', 'skyview'].includes(project.id);
 const status = archive
@@ -38,6 +38,7 @@ const related = portfolioProjects
 	.slice(0, 2);
 
 function screenshotCaption(index: number) {
+	if (project!.imageCaptions?.[index]) return project!.imageCaptions[index];
 	if (project!.id === 'hifz-diary') {
 		return (
 			[
@@ -50,7 +51,7 @@ function screenshotCaption(index: number) {
 			][index] ?? 'Hifz Diary product preview'
 		);
 	}
-	return `${platform} application · Product preview ${index + 1}`;
+	return `${platform} ${project!.type === 'web' ? 'website' : 'application'} · Product preview ${index + 1}`;
 }
 ---
 

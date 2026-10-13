@@ -1,10 +1,11 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { portfolioProjects, getProjectImages } from '../data/portfolio';
+import { portfolioProjects, getProjectImages, getProjectPlatform } from '../data/portfolio';
 import SDriveVisual from '../components/SDriveVisual.astro';
 import ProjectInvitation from '../components/ProjectInvitation.astro';
 const groups: Record<string, string> = {
 	sdrive: 'services',
+	vbay: 'web',
 	twidlee: 'services',
 	maxximus: 'services',
 	bbm: 'services',
@@ -20,6 +21,7 @@ const categories = [
 	{ id: 'services', label: 'Marketplaces & services' },
 	{ id: 'operations', label: 'Business operations' },
 	{ id: 'consumer', label: 'Consumer products' },
+	{ id: 'web', label: 'Websites & commerce' },
 ];
 ---
 
@@ -93,7 +95,7 @@ const categories = [
 							<p>
 								<strong>My responsibility:</strong> {p.roleSnippet}
 							</p>
-							<span class="tag">{p.type === 'native' ? 'Native Android' : 'Flutter'}</span>
+							<span class="tag">{getProjectPlatform(p)}</span>
 						</article>
 					))}
 			</div>
@@ -114,7 +116,7 @@ const categories = [
 				if (!card.hidden) count++;
 			});
 			const label = document.getElementById('work-count');
-			if (label) label.textContent = `${count} projects`;
+			if (label) label.textContent = `${count} ${count === 1 ? 'project' : 'projects'}`;
 		})
 	);
 </script>
