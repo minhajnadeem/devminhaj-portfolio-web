@@ -7,14 +7,314 @@ import ProfilePhoto from '../components/ProfilePhoto.astro';
 import SelectedWork from '../components/SelectedWork.astro';
 import ProjectInvitation from '../components/ProjectInvitation.astro';
 ---
-<SiteLayout title="Full Stack Product Engineer" description="Full Stack Product Engineer building customer apps, operational dashboards, and connected backends for founders and service businesses. Explore delivered work and discuss your project."><section class="section hero"><div class="container split"><div><span class="eyebrow">Full Stack Product Engineer</span><h1>Complete software.<br/>From requirements<br/><em>to deployment.</em></h1><p class="lead">I build and deploy complete software solutions for businesses.</p><p class="hero-intro">I’m Minhaj, a Full Stack Product Engineer. I turn business requirements into mobile apps, websites, admin panels, backend systems, and cloud deployments—with ownership across the technical delivery.</p><div class="actions"><a class="button" href="/contact">Discuss your project ↗</a><a class="button secondary" href="/portfolio">View my work →</a></div><p class="hero-note">8+ years in mobile engineering · One accountable delivery partner</p><p class="hero-response">{contactDetails.response}</p></div><ProfilePhoto priority /></div></section><section class="early-trust" aria-label="Professional recommendation"><div class="container"><blockquote class="quote">“Whether delivering as a solo developer or contributing to a team, he consistently produces exceptional results. He is my go-to person for any mobile product.”</blockquote><p class="muted">Yahya K. · Mobile development recommendation</p><a class="text-link" href="https://www.linkedin.com/in/minhaj-nadeem/details/recommendations/" target="_blank" rel="noopener noreferrer">Read LinkedIn recommendations ↗</a></div></section>
-<section class="section"><div class="container"><div class="section-heading"><span class="eyebrow">Built around your business</span><h2>What do you need built?</h2><p class="lead">Complete platforms or focused development for marketplaces, booking services, transport, delivery, and education.</p></div><div class="grid"><article class="card"><span class="number">01 / COMPLETE SOLUTION</span><h3>Build your complete solution.</h3><p>Bring your business requirements. I build the connected apps, web interfaces, backend, and deployment needed to deliver them.</p></article><article class="card"><span class="number">02 / FOCUSED DEVELOPMENT</span><h3>Develop an app or system.</h3><p>Develop a mobile app, website, admin interface, or backend that fits your existing business and technical systems.</p></article><article class="card"><span class="number">03 / EXISTING SOFTWARE</span><h3>Improve your software.</h3><p>Add capabilities, improve your mobile experience, or extend the software your business already relies on.</p></article></div></div></section>
-<section class="section services-section"><div class="container split"><div><span class="eyebrow">How I can help</span><h2>Connected decisions.<br/>Clear responsibility.</h2><p class="lead">Direct communication with the person building your software. Connected decisions across your product and operations.</p><a class="text-link" href="/services">Explore services →</a></div><div class="service-list"><article><span>01</span><div><h3>Build a complete software solution</h3><p>Technical scoping, mobile and web applications, backend, admin tools, and cloud deployment.</p></div></article><article><span>02</span><div><h3>Develop an app or system</h3><p>Focused mobile, web, or backend development, connected to your existing systems.</p></div></article><article><span>03</span><div><h3>Improve existing software</h3><p>Features, integrations, performance, maintenance, and technical consulting.</p></div></article></div></div></section>
-<section class="section dark"><div class="container split"><div><span class="eyebrow">Flagship case study / SDrive</span><h2>A ride-hailing business.<br/>A connected platform.</h2><p class="lead">Riders, drivers, and administrators need different tools that work together. I independently built the rider and driver apps, marketing website, administration portal, and backend, and deployed the platform on Google Cloud.</p><div class="scope-tags"><span>Rider + driver apps</span><span>Website + admin</span><span>Backend + cloud</span></div><div class="actions"><a class="button" href="/portfolio/sdrive">Explore the SDrive story →</a></div></div><SDriveVisual compact /></div></section>
-<section class="section"><div class="container"><div class="section-heading"><span class="eyebrow">Selected work</span><h2>Different businesses.<br/>Real product experience.</h2><p class="lead">A training platform, a restaurant-deals marketplace, and a multi-role education product—each with a clearly defined delivery scope.</p></div><SelectedWork /><div class="actions"><a class="text-link" href="/portfolio">View all work →</a></div></div></section>
-<section class="section process-section"><div class="container"><div class="section-heading"><span class="eyebrow">Working together</span><h2>A clear path from requirements to deployment.</h2></div><div class="process"><article><span class="eyebrow">01 / Requirements</span><h3>Clarify the technical scope.</h3><p>Review your requirements, user journeys, existing systems, and integration needs.</p></article><article><span class="eyebrow">02 / Plan</span><h3>Plan the implementation.</h3><p>Define architecture, dependencies, milestones, and a delivery estimate.</p></article><article><span class="eyebrow">03 / Build</span><h3>Review real progress.</h3><p>Build through reviewable milestones and demonstrate the connected experience.</p></article><article><span class="eyebrow">04 / Deploy</span><h3>Deploy and hand over.</h3><p>Test the system, deploy, and agree on handover and ongoing support.</p></article></div></div></section>
-<section class="section"><div class="container"><div class="section-heading"><span class="eyebrow">Experience behind the delivery</span><h2>Technical depth.<br/>Personal accountability.</h2><p class="lead">My foundation is eight-plus years building Android and Flutter products, working with startups and remote teams across Dubai and Germany.</p><a class="text-link" href="/about">Get to know me →</a></div></div></section><EngagementFAQ compact /><ProjectInvitation /></SiteLayout>
-<style>.hero{padding:70px 0 74px}.hero h1 em{font-style:normal;color:#2f9983}.hero-intro{max-width:580px;color:#6b7280;font-size:.98rem}.hero-note{font-size:.75rem;color:#6b7280;margin-top:24px;margin-bottom:0}.services-section,.process-section{background:#f7f0f0}.service-list article{display:flex;gap:24px;border-top:1px solid #2f998333;padding:22px 0}.service-list article>span{font-size:.8rem;color:#2f9983;padding-top:16px}.service-list p{color:#6b7280;margin:0}.scope-tags{display:flex;flex-wrap:wrap;gap:10px}.scope-tags span{border:1px solid #587c74;border-radius:4px;font-size:.75rem;padding:6px 10px}
 
-.hero-response{font-size:.8rem;color:var(--color-navy);margin:8px 0 0}.early-trust{padding:32px 0;border-top:1px solid rgba(47,153,131,.2);border-bottom:1px solid rgba(47,153,131,.2);background:rgba(166,143,200,.06)}.early-trust .quote{max-width:900px;font-size:1.05rem;margin-bottom:16px}.early-trust .muted{font-size:.85rem;margin-bottom:12px}.early-trust .text-link{font-size:.85rem}
+<SiteLayout
+	title="Full Stack Product Engineer"
+	description="Full Stack Product Engineer building customer apps, operational dashboards, and connected backends for founders and service businesses. Explore delivered work and discuss your project."
+>
+	<section class="section hero">
+		<div class="container split">
+			<div>
+				<span class="eyebrow">Full Stack Product Engineer</span>
+				<h1>
+					Complete software.
+					<br />
+					From requirements
+					<br />
+					<em>to deployment.</em>
+				</h1>
+				<p class="lead">I build and deploy complete software solutions for businesses.</p>
+				<p class="hero-intro">
+					I’m Minhaj, a Full Stack Product Engineer. I turn business requirements into mobile apps,
+					websites, admin panels, backend systems, and cloud deployments—with ownership across the
+					technical delivery.
+				</p>
+				<div class="actions">
+					<a class="button" href="/contact">
+						Discuss your project ↗
+					</a>
+					<a class="button secondary" href="/portfolio">
+						View my work →
+					</a>
+				</div>
+				<p class="hero-note">8+ years in mobile engineering · One accountable delivery partner</p>
+				<p class="hero-response">{contactDetails.response}</p>
+			</div>
+			<ProfilePhoto priority />
+		</div>
+	</section>
+	<section class="early-trust" aria-label="Professional recommendation">
+		<div class="container">
+			<blockquote class="quote">
+				“Whether delivering as a solo developer or contributing to a team, he consistently produces
+				exceptional results. He is my go-to person for any mobile product.”
+			</blockquote>
+			<p class="muted">Yahya K. · Mobile development recommendation</p>
+			<a
+				class="text-link"
+				href="https://www.linkedin.com/in/minhaj-nadeem/details/recommendations/"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Read LinkedIn recommendations ↗
+			</a>
+		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<div class="section-heading">
+				<span class="eyebrow">Built around your business</span>
+				<h2>What do you need built?</h2>
+				<p class="lead">
+					Complete platforms or focused development for marketplaces, booking services, transport,
+					delivery, and education.
+				</p>
+			</div>
+			<div class="grid">
+				<article class="card">
+					<span class="number">01 / COMPLETE SOLUTION</span>
+					<h3>Build your complete solution.</h3>
+					<p>
+						Bring your business requirements. I build the connected apps, web interfaces, backend,
+						and deployment needed to deliver them.
+					</p>
+				</article>
+				<article class="card">
+					<span class="number">02 / FOCUSED DEVELOPMENT</span>
+					<h3>Develop an app or system.</h3>
+					<p>
+						Develop a mobile app, website, admin interface, or backend that fits your existing
+						business and technical systems.
+					</p>
+				</article>
+				<article class="card">
+					<span class="number">03 / EXISTING SOFTWARE</span>
+					<h3>Improve your software.</h3>
+					<p>
+						Add capabilities, improve your mobile experience, or extend the software your business
+						already relies on.
+					</p>
+				</article>
+			</div>
+		</div>
+	</section>
+	<section class="section services-section">
+		<div class="container split">
+			<div>
+				<span class="eyebrow">How I can help</span>
+				<h2>
+					Connected decisions.
+					<br />
+					Clear responsibility.
+				</h2>
+				<p class="lead">
+					Direct communication with the person building your software. Connected decisions across
+					your product and operations.
+				</p>
+				<a class="text-link" href="/services">
+					Explore services →
+				</a>
+			</div>
+			<div class="service-list">
+				<article>
+					<span>01</span>
+					<div>
+						<h3>Build a complete software solution</h3>
+						<p>
+							Technical scoping, mobile and web applications, backend, admin tools, and cloud
+							deployment.
+						</p>
+					</div>
+				</article>
+				<article>
+					<span>02</span>
+					<div>
+						<h3>Develop an app or system</h3>
+						<p>Focused mobile, web, or backend development, connected to your existing systems.</p>
+					</div>
+				</article>
+				<article>
+					<span>03</span>
+					<div>
+						<h3>Improve existing software</h3>
+						<p>Features, integrations, performance, maintenance, and technical consulting.</p>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<section class="section dark">
+		<div class="container split">
+			<div>
+				<span class="eyebrow">Flagship case study / SDrive</span>
+				<h2>
+					A ride-hailing business.
+					<br />A connected platform.
+				</h2>
+				<p class="lead">
+					Riders, drivers, and administrators need different tools that work together. I
+					independently built the rider and driver apps, marketing website, administration portal,
+					and backend, and deployed the platform on Google Cloud.
+				</p>
+				<div class="scope-tags">
+					<span>Rider + driver apps</span>
+					<span>Website + admin</span>
+					<span>Backend + cloud</span>
+				</div>
+				<div class="actions">
+					<a class="button" href="/portfolio/sdrive">
+						Explore the SDrive story →
+					</a>
+				</div>
+			</div>
+			<SDriveVisual compact />
+		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<div class="section-heading">
+				<span class="eyebrow">Selected work</span>
+				<h2>
+					Different businesses.
+					<br />
+					Real product experience.
+				</h2>
+				<p class="lead">
+					A training platform, a restaurant-deals marketplace, and a multi-role education
+					product—each with a clearly defined delivery scope.
+				</p>
+			</div>
+			<SelectedWork />
+			<div class="actions">
+				<a class="text-link" href="/portfolio">
+					View all work →
+				</a>
+			</div>
+		</div>
+	</section>
+	<section class="section process-section">
+		<div class="container">
+			<div class="section-heading">
+				<span class="eyebrow">Working together</span>
+				<h2>A clear path from requirements to deployment.</h2>
+			</div>
+			<div class="process">
+				<article>
+					<span class="eyebrow">01 / Requirements</span>
+					<h3>Clarify the technical scope.</h3>
+					<p>Review your requirements, user journeys, existing systems, and integration needs.</p>
+				</article>
+				<article>
+					<span class="eyebrow">02 / Plan</span>
+					<h3>Plan the implementation.</h3>
+					<p>Define architecture, dependencies, milestones, and a delivery estimate.</p>
+				</article>
+				<article>
+					<span class="eyebrow">03 / Build</span>
+					<h3>Review real progress.</h3>
+					<p>Build through reviewable milestones and demonstrate the connected experience.</p>
+				</article>
+				<article>
+					<span class="eyebrow">04 / Deploy</span>
+					<h3>Deploy and hand over.</h3>
+					<p>Test the system, deploy, and agree on handover and ongoing support.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<div class="section-heading">
+				<span class="eyebrow">Experience behind the delivery</span>
+				<h2>
+					Technical depth.
+					<br />
+					Personal accountability.
+				</h2>
+				<p class="lead">
+					My foundation is eight-plus years building Android and Flutter products, working with
+					startups and remote teams across Dubai and Germany.
+				</p>
+				<a class="text-link" href="/about">
+					Get to know me →
+				</a>
+			</div>
+		</div>
+	</section>
+	<EngagementFAQ compact />
+	<ProjectInvitation />
+</SiteLayout>
+<style>
+	.hero {
+		padding: 70px 0 74px;
+	}
+	.hero h1 em {
+		font-style: normal;
+		color: #2f9983;
+	}
+	.hero-intro {
+		max-width: 580px;
+		color: #6b7280;
+		font-size: 0.98rem;
+	}
+	.hero-note {
+		font-size: 0.75rem;
+		color: #6b7280;
+		margin-top: 24px;
+		margin-bottom: 0;
+	}
+	.services-section,
+	.process-section {
+		background: #f7f0f0;
+	}
+	.service-list article {
+		display: flex;
+		gap: 24px;
+		border-top: 1px solid #2f998333;
+		padding: 22px 0;
+	}
+	.service-list article > span {
+		font-size: 0.8rem;
+		color: #2f9983;
+		padding-top: 16px;
+	}
+	.service-list p {
+		color: #6b7280;
+		margin: 0;
+	}
+	.scope-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+	.scope-tags span {
+		border: 1px solid rgba(247, 240, 240, 0.3);
+		border-radius: 4px;
+		font-size: 0.75rem;
+		padding: 6px 10px;
+	}
+
+	.hero-response {
+		font-size: 0.8rem;
+		color: var(--color-navy);
+		margin: 8px 0 0;
+	}
+	.early-trust {
+		padding: 32px 0;
+		border-top: 1px solid rgba(47, 153, 131, 0.2);
+		border-bottom: 1px solid rgba(47, 153, 131, 0.2);
+		background: rgba(166, 143, 200, 0.06);
+	}
+	.early-trust .quote {
+		max-width: 900px;
+		font-size: 1.05rem;
+		margin-bottom: 16px;
+	}
+	.early-trust .muted {
+		font-size: 0.85rem;
+		margin-bottom: 12px;
+	}
+	.early-trust .text-link {
+		font-size: 0.85rem;
+	}
 </style>

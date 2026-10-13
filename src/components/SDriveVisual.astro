@@ -1,6 +1,316 @@
 ---
-interface Props { compact?: boolean; }
-const {compact=false}=Astro.props;
+interface Props {
+	compact?: boolean;
+}
+const { compact = false } = Astro.props;
 ---
-<div class:list={['platform-visual',{compact}]} role="img" aria-label="Illustration of SDrive rider app, driver app, administration portal, website, and backend. Product screenshots coming soon."><div class="visual-top"><span><i></i> SDRIVE / CONNECTED PLATFORM</span><span>01 — 05</span></div><div class="dashboard"><div class="dash-sidebar"><b>SDrive</b><span>Overview</span><span>Users</span><span>Onboarding</span><span>Operations</span></div><div class="dash-content"><small>ADMINISTRATION PORTAL</small><h4>A view of the whole operation.</h4><div class="dash-tiles"><span>People<br/><b>Connected</b></span><span>Workflows<br/><b>Centralized</b></span></div><div class="dash-lines"><i></i><i></i><i></i></div></div></div><div class="phone"><div class="phone-notch"></div><small>RIDER EXPERIENCE</small><b>Where to next?</b><div class="map"><span class="map-route"></span><i class="pin one"></i><i class="pin two"></i></div><div class="phone-field">Pickup → Destination</div><span class="phone-button">Your journey starts here</span></div><div class="driver-label">↗ DRIVER APP</div><div class="website-label">WWW. · MARKETING WEBSITE</div><div class="visual-bottom"><span>Apps + web + admin + backend + cloud</span><span>Illustrative placeholder · Screenshots coming soon</span></div></div>
-<style>.platform-visual{position:relative;background:#2f99831a;border:1px solid #c8ddce;border-radius:14px;min-height:480px;padding:24px;overflow:hidden;color:#1b3956;background-image:radial-gradient(#aac8b855 1px,transparent 1px);background-size:20px 20px}.visual-top{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.12em;font-weight:700}.visual-top i{display:inline-block;background:#2f9983;width:7px;height:7px;border-radius:50%;margin-right:7px}.dashboard{position:absolute;top:94px;left:24px;right:24px;height:245px;display:flex;background:white;border:1px solid #c1d4c7;border-radius:8px;box-shadow:0 20px 40px #1b395612;overflow:hidden}.dash-sidebar{background:#1b3956;color:#bfd3cb;width:105px;padding:22px 14px;display:flex;flex-direction:column;gap:14px;font-size:9px}.dash-sidebar b{font-size:18px;color:white;margin-bottom:8px}.dash-content{padding:24px;flex:1}.dash-content small{font-size:8px;letter-spacing:.12em}.dash-content h4{font-size:19px;max-width:180px;margin:13px 0}.dash-tiles{display:flex;gap:10px}.dash-tiles span{font-size:8px;background:#2f99831a;padding:10px;border-radius:4px}.dash-tiles b{font-size:11px}.dash-lines{margin-top:16px;display:grid;gap:7px}.dash-lines i{height:5px;width:60%;background:#e7efea}.phone{position:absolute;right:36px;top:154px;width:164px;border:6px solid #1b3956;border-radius:25px;background:#f7f0f0;padding:20px 9px 14px;box-shadow:0 18px 30px #1b395625;transform:rotate(6deg)}.phone-notch{position:absolute;width:58px;height:10px;background:#1b3956;border-radius:0 0 8px 8px;top:0;left:47px}.phone small{font-size:7px;display:block;color:#2f9983;letter-spacing:.05em}.phone>b{font-size:14px}.map{height:110px;position:relative;margin:12px 0;background:repeating-linear-gradient(25deg,transparent 0 20px,#fff 21px 26px),repeating-linear-gradient(115deg,#e3ecdf 0 28px,#fff 29px 34px);overflow:hidden}.map-route{position:absolute;width:55px;height:68px;border:3px solid #2f9983;border-left:0;transform:rotate(18deg);left:42px;top:18px}.pin{position:absolute;width:10px;height:10px;border-radius:50%;background:#1b3956;border:2px solid white}.one{left:41px;top:14px}.two{left:28px;top:77px}.phone-field{font-size:8px;border:1px solid #2f998333;padding:8px;border-radius:4px}.phone-button{font-size:7px;background:#2f9983;color:white;display:block;text-align:center;padding:10px 2px;margin-top:8px;border-radius:4px}.driver-label,.website-label{position:absolute;background:#f7f0f0;border:1px solid #bdd1c2;padding:10px 14px;border-radius:5px;font-size:9px;font-weight:700;letter-spacing:.07em}.driver-label{left:30px;top:361px}.website-label{left:30px;top:409px}.visual-bottom{position:absolute;bottom:18px;left:24px;right:24px;display:flex;flex-direction:column;gap:3px;font-size:8px;color:#6b7280}.visual-bottom span:first-child{font-size:10px;font-weight:600}.compact{min-height:470px}@media(max-width:600px){.platform-visual{min-height:470px}.dash-content{padding:18px 12px}.dash-content h4{max-width:130px;font-size:16px}.phone{right:20px;width:150px}.phone-notch{left:40px}.dash-sidebar{width:80px;padding:20px 10px}.dashboard{left:14px;right:14px}.visual-top{font-size:8px}.website-label,.driver-label{left:20px}}</style>
+
+<div
+	class:list={['platform-visual', { compact }]}
+	role="img"
+	aria-label="Illustration of SDrive rider app, driver app, administration portal, website, and backend. Product screenshots coming soon."
+>
+	<div class="visual-top">
+		<span>
+			<i></i> SDRIVE / CONNECTED PLATFORM
+		</span>
+		<span>01 — 05</span>
+	</div>
+	<div class="dashboard">
+		<div class="dash-sidebar">
+			<b>SDrive</b>
+			<span>Overview</span>
+			<span>Users</span>
+			<span>Onboarding</span>
+			<span>Operations</span>
+		</div>
+		<div class="dash-content">
+			<small>ADMINISTRATION PORTAL</small>
+			<h4>A view of the whole operation.</h4>
+			<div class="dash-tiles">
+				<span>
+					People
+					<br />
+					<b>Connected</b>
+				</span>
+				<span>
+					Workflows
+					<br />
+					<b>Centralized</b>
+				</span>
+			</div>
+			<div class="dash-lines">
+				<i></i>
+				<i></i>
+				<i></i>
+			</div>
+		</div>
+	</div>
+	<div class="phone">
+		<div class="phone-notch"></div>
+		<small>RIDER EXPERIENCE</small>
+		<b>Where to next?</b>
+		<div class="map">
+			<span class="map-route"></span>
+			<i class="pin one"></i>
+			<i class="pin two"></i>
+		</div>
+		<div class="phone-field">Pickup → Destination</div>
+		<span class="phone-button">Your journey starts here</span>
+	</div>
+	<div class="driver-label">↗ DRIVER APP</div>
+	<div class="website-label">WWW. · MARKETING WEBSITE</div>
+	<div class="visual-bottom">
+		<span>Apps + web + admin + backend + cloud</span>
+		<span>Illustrative placeholder · Screenshots coming soon</span>
+	</div>
+</div>
+<style>
+	.platform-visual {
+		position: relative;
+		background: rgba(47, 153, 131, 0.1);
+		border: 1px solid rgba(47, 153, 131, 0.25);
+		border-radius: 14px;
+		min-height: 520px;
+		padding: 24px;
+		overflow: hidden;
+		color: var(--color-navy);
+		background-image: radial-gradient(rgba(47, 153, 131, 0.18) 1px, transparent 1px);
+		background-size: 20px 20px;
+	}
+	.visual-top {
+		display: flex;
+		justify-content: space-between;
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+	}
+	.visual-top i {
+		display: inline-block;
+		background: var(--color-teal);
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		margin-right: 7px;
+	}
+	.dashboard {
+		position: absolute;
+		top: 94px;
+		left: 24px;
+		right: 24px;
+		height: 245px;
+		display: flex;
+		background: var(--color-white);
+		border: 1px solid rgba(47, 153, 131, 0.25);
+		border-radius: 8px;
+		box-shadow: 0 20px 40px rgba(27, 57, 86, 0.07);
+		overflow: hidden;
+	}
+	.dash-sidebar {
+		background: var(--color-navy);
+		color: rgba(247, 240, 240, 0.85);
+		width: 105px;
+		padding: 22px 14px;
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		font-size: 9px;
+	}
+	.dash-sidebar b {
+		font-size: 18px;
+		color: var(--color-white);
+		margin-bottom: 8px;
+	}
+	.dash-content {
+		padding: 24px;
+		flex: 1;
+	}
+	.dash-content small {
+		font-size: 8px;
+		letter-spacing: 0.12em;
+	}
+	.dash-content h4 {
+		font-size: 19px;
+		max-width: 180px;
+		margin: 13px 0;
+	}
+	.dash-tiles {
+		display: flex;
+		gap: 10px;
+	}
+	.dash-tiles span {
+		font-size: 8px;
+		background: rgba(47, 153, 131, 0.1);
+		padding: 10px;
+		border-radius: 4px;
+	}
+	.dash-tiles b {
+		font-size: 11px;
+	}
+	.dash-lines {
+		margin-top: 16px;
+		display: grid;
+		gap: 7px;
+	}
+	.dash-lines i {
+		height: 5px;
+		width: 60%;
+		background: rgba(47, 153, 131, 0.12);
+	}
+	.phone {
+		position: absolute;
+		right: 36px;
+		top: 154px;
+		width: 164px;
+		border: 6px solid var(--color-navy);
+		border-radius: 25px;
+		background: var(--color-white);
+		padding: 20px 9px 14px;
+		box-shadow: 0 18px 30px rgba(27, 57, 86, 0.15);
+		transform: rotate(6deg);
+	}
+	.phone-notch {
+		position: absolute;
+		width: 58px;
+		height: 10px;
+		background: var(--color-navy);
+		border-radius: 0 0 8px 8px;
+		top: 0;
+		left: 47px;
+	}
+	.phone small {
+		font-size: 7px;
+		display: block;
+		color: var(--color-teal);
+		letter-spacing: 0.05em;
+	}
+	.phone > b {
+		font-size: 14px;
+	}
+	.map {
+		height: 110px;
+		position: relative;
+		margin: 12px 0;
+		background:
+			repeating-linear-gradient(25deg, transparent 0 20px, var(--color-white) 21px 26px),
+			repeating-linear-gradient(
+				115deg,
+				rgba(47, 153, 131, 0.12) 0 28px,
+				var(--color-white) 29px 34px
+			);
+		overflow: hidden;
+	}
+	.map-route {
+		position: absolute;
+		width: 55px;
+		height: 68px;
+		border: 3px solid var(--color-teal);
+		border-left: 0;
+		transform: rotate(18deg);
+		left: 42px;
+		top: 18px;
+	}
+	.pin {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--color-navy);
+		border: 2px solid var(--color-white);
+	}
+	.one {
+		left: 41px;
+		top: 14px;
+	}
+	.two {
+		left: 28px;
+		top: 77px;
+	}
+	.phone-field {
+		font-size: 8px;
+		border: 1px solid rgba(47, 153, 131, 0.2);
+		padding: 8px;
+		border-radius: 4px;
+	}
+	.phone-button {
+		font-size: 7px;
+		background: var(--color-teal);
+		color: var(--color-white);
+		display: block;
+		text-align: center;
+		padding: 10px 2px;
+		margin-top: 8px;
+		border-radius: 4px;
+	}
+	.driver-label,
+	.website-label {
+		position: absolute;
+		background: var(--color-white);
+		border: 1px solid rgba(47, 153, 131, 0.25);
+		padding: 10px 14px;
+		border-radius: 5px;
+		font-size: 9px;
+		font-weight: 700;
+		letter-spacing: 0.07em;
+	}
+	.driver-label {
+		left: 30px;
+		top: 361px;
+	}
+	.website-label {
+		left: 30px;
+		top: 409px;
+	}
+	.visual-bottom {
+		position: absolute;
+		bottom: 18px;
+		left: 24px;
+		right: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+		font-size: 8px;
+		color: var(--color-text-light);
+	}
+	.visual-bottom span:first-child {
+		font-size: 10px;
+		font-weight: 600;
+	}
+	.compact {
+		min-height: 520px;
+	}
+	@media (max-width: 600px) {
+		.platform-visual {
+			min-height: 520px;
+		}
+		.dash-content {
+			padding: 18px 12px;
+		}
+		.dash-content h4 {
+			max-width: 130px;
+			font-size: 16px;
+		}
+		.phone {
+			right: 20px;
+			width: 150px;
+		}
+		.phone-notch {
+			left: 40px;
+		}
+		.dash-sidebar {
+			width: 80px;
+			padding: 20px 10px;
+		}
+		.dashboard {
+			left: 14px;
+			right: 14px;
+		}
+		.visual-top {
+			font-size: 8px;
+		}
+		.website-label,
+		.driver-label {
+			left: 20px;
+		}
+	}
+</style>

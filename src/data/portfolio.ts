@@ -44,14 +44,37 @@ export interface PortfolioProject {
 export const PORTFOLIO_ASSETS_BASE = "/assets/portfolio";
 
 const projects: PortfolioProject[] = [
- { id: "sdrive", caseStudyKind: "featured", name: "SDrive", slug: "sdrive", type: "flutter", pitch: "A complete ride-hailing platform connecting riders, drivers, and business operations.", description: "Independently developed and delivered a ride-hailing solution with rider and driver Flutter apps, a marketing website, an administration portal, backend, and Google Cloud deployment.", tech: ["Flutter", "Google Cloud", "Technical Delivery"], url: "https://sdrive.africa/", linkLabel: "Website", images: [], roleSnippet: "Sole developer across the connected platform, from implementation through cloud deployment.", featured: true, role: ["Rider and driver app development", "Marketing website and administration portal", "Backend and Google Cloud deployment"], links: [{ label: "Website", url: "https://sdrive.africa/" }] },
+	{
+		id: "sdrive",
+		caseStudyKind: "featured",
+		name: "SDrive",
+		slug: "sdrive",
+		type: "flutter",
+		pitch: "A complete ride-hailing platform connecting riders, drivers, and business operations.",
+		description:
+			"Independently developed and delivered a ride-hailing solution with rider and driver Flutter apps, a marketing website, an administration portal, backend, and Google Cloud deployment.",
+		tech: ["Flutter", "Google Cloud", "Technical Delivery"],
+		url: "https://sdrive.africa/",
+		linkLabel: "Website",
+		images: [],
+		roleSnippet:
+			"Sole developer across the connected platform, from implementation through cloud deployment.",
+		featured: true,
+		role: [
+			"Rider and driver app development",
+			"Marketing website and administration portal",
+			"Backend and Google Cloud deployment",
+		],
+		links: [{ label: "Website", url: "https://sdrive.africa/" }],
+	},
 	// —— Native Android ——
 	{
 		id: "twidlee",
 		name: "Twidlee",
 		slug: "twidlee",
 		type: "native",
-		pitch: "B2C platform for time-sensitive restaurant deals — reserve and redeem dine-in or carryout.",
+		pitch:
+			"B2C platform for time-sensitive restaurant deals — reserve and redeem dine-in or carryout.",
 		description:
 			"A B2C platform enabling restaurants to drive revenue during off-peak hours through time-sensitive flash deals. Customers browse, reserve, and redeem offers for dine-in or carryout.",
 		tech: ["Android", "Kotlin", "MVVM", "Retrofit", "Google Maps", "Firebase"],
@@ -80,7 +103,10 @@ const projects: PortfolioProject[] = [
 		],
 		links: [
 			{ label: "Website", url: "https://twidlee.com/" },
-			{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.twidlee.android" },
+			{
+				label: "Play Store",
+				url: "https://play.google.com/store/apps/details?id=com.twidlee.android",
+			},
 		],
 	},
 	{
@@ -97,10 +123,14 @@ const projects: PortfolioProject[] = [
 		urlSecondary: "https://devcrew.io/project/final-touch/",
 		linkLabelSecondary: "Project Page",
 		images: ["final_touch.png"],
-		roleSnippet: "Built from scratch at Devcrew I/O; core editing capabilities and clean architecture.",
+		roleSnippet:
+			"Built from scratch at Devcrew I/O; core editing capabilities and clean architecture.",
 		achievementSnippet: "Launched company's first in-house product.",
 		featured: true,
-		keyFeatures: ["Comprehensive editing toolkit", "Intuitive interface for quick professional enhancements"],
+		keyFeatures: [
+			"Comprehensive editing toolkit",
+			"Intuitive interface for quick professional enhancements",
+		],
 		role: [
 			"Built from scratch at Devcrew I/O",
 			"Developed core editing capabilities and preserved clean architecture",
@@ -113,7 +143,10 @@ const projects: PortfolioProject[] = [
 		],
 		links: [
 			{ label: "Project Page", url: "https://devcrew.io/project/final-touch/" },
-			{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=io.devcrew.finaltouch" },
+			{
+				label: "Play Store",
+				url: "https://play.google.com/store/apps/details?id=io.devcrew.finaltouch",
+			},
 		],
 	},
 	{
@@ -128,8 +161,10 @@ const projects: PortfolioProject[] = [
 		url: "https://play.google.com/store/apps/details?id=com.speedfame.fr",
 		linkLabel: "View on Play Store",
 		images: ["speedfame_1.png", "speedfame_2 .png"],
-		roleSnippet: "Developed complete app from scratch; led technical decisions and real-time integration.",
-		achievementSnippet: "Delivered production TV app with live communication; mastered Jetpack Compose.",
+		roleSnippet:
+			"Developed complete app from scratch; led technical decisions and real-time integration.",
+		achievementSnippet:
+			"Delivered production TV app with live communication; mastered Jetpack Compose.",
 		featured: true,
 		keyFeatures: [
 			"Real-time content and ad playback",
@@ -146,14 +181,20 @@ const projects: PortfolioProject[] = [
 			"Delivered a production TV application with live communication",
 			"Mastered Jetpack Compose in a real-world context",
 		],
-		links: [{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.speedfame.fr" }],
+		links: [
+			{
+				label: "Play Store",
+				url: "https://play.google.com/store/apps/details?id=com.speedfame.fr",
+			},
+		],
 	},
 	{
 		id: "bbm",
 		name: "Best Buy Mall (BBM)",
 		slug: "bbm",
 		type: "native",
-		pitch: "E-commerce for local businesses — online stores, orders, delivery, live rider tracking.",
+		pitch:
+			"E-commerce for local businesses — online stores, orders, delivery, live rider tracking.",
 		description:
 			"E-commerce solution empowering local businesses to launch online stores while providing customers with ordering, delivery, and real-time rider tracking.",
 		tech: ["Android", "Java", "MVC", "Retrofit", "Room", "Google Maps", "Firebase"],
@@ -161,10 +202,15 @@ const projects: PortfolioProject[] = [
 		linkLabel: "Website",
 		images: ["bbm_1.png", "bbm_2.png"],
 		roleSnippet: "Full development from scratch; integrated APIs, UI, and third-party SDKs.",
-		achievementSnippet: "Enabled in-house startup launch in multiple cities; complete rider tracking system.",
+		achievementSnippet:
+			"Enabled in-house startup launch in multiple cities; complete rider tracking system.",
 		featured: false,
 		note: "Delisted due to lack of maintenance",
-		keyFeatures: ["Merchant store creation", "Order management & live tracking", "Offline-first resilience"],
+		keyFeatures: [
+			"Merchant store creation",
+			"Order management & live tracking",
+			"Offline-first resilience",
+		],
 		role: [
 			"Full development from scratch at Emblem Technologies",
 			"Integrated APIs, UI, and third-party SDKs",
@@ -189,7 +235,8 @@ const projects: PortfolioProject[] = [
 		linkLabel: "View portfolio",
 		images: [],
 		roleSnippet: "Built from scratch; designed and implemented full UI and API integration.",
-		achievementSnippet: "Company's inaugural trivia title; precise video timing and animation sync.",
+		achievementSnippet:
+			"Company's inaugural trivia title; precise video timing and animation sync.",
 		featured: false,
 		note: "Delisted due to non-maintenance",
 		keyFeatures: ["Timed quizzes with video answer reveals", "Dynamic animations for immersion"],
@@ -216,10 +263,14 @@ const projects: PortfolioProject[] = [
 		url: "https://bemomentful.com/",
 		linkLabel: "Website",
 		images: ["momentful.png"],
-		roleSnippet: "Maintained and enhanced existing app; fixed features, added capabilities, integrated APIs.",
+		roleSnippet:
+			"Maintained and enhanced existing app; fixed features, added capabilities, integrated APIs.",
 		achievementSnippet: "Delivered custom views and sophisticated animations.",
 		featured: false,
-		keyFeatures: ["Custom card creation & instant delivery", "Group sending and interactive replies"],
+		keyFeatures: [
+			"Custom card creation & instant delivery",
+			"Group sending and interactive replies",
+		],
 		role: [
 			"Maintained and enhanced existing app at Emblem Technologies",
 			"Fixed features, added new capabilities, integrated APIs",
@@ -269,10 +320,7 @@ const projects: PortfolioProject[] = [
 		roleSnippet: "Sole developer from scratch; UI and database design.",
 		featured: false,
 		keyFeatures: ["Task management with local persistence", "Clean, intuitive interface"],
-		role: [
-			"Sole developer from scratch for Toptech.teams",
-			"Implemented UI and database design",
-		],
+		role: ["Sole developer from scratch for Toptech.teams", "Implemented UI and database design"],
 		achievements: [],
 		links: [],
 	},
@@ -305,7 +353,8 @@ const projects: PortfolioProject[] = [
 		name: "Maxximus",
 		slug: "maxximus",
 		type: "flutter",
-		pitch: "London marketplace with AI-powered search — match with service providers via text/voice.",
+		pitch:
+			"London marketplace with AI-powered search — match with service providers via text/voice.",
 		description:
 			"London-based marketplace connecting users to service providers via AI-powered search. Describe needs via text/voice; AI refines with follow-ups and matches best providers.",
 		tech: ["Flutter", "Dart", "Clean Architecture", "Bloc", "Stripe", "Daily.co", "OpenAI"],
@@ -314,8 +363,10 @@ const projects: PortfolioProject[] = [
 		urlSecondary: "https://maxximus.uk/",
 		linkLabelSecondary: "Website",
 		images: [],
-		roleSnippet: "End-to-end development from scratch; architectural leadership, code reviews, sprint planning.",
-		achievementSnippet: "Launched scalable AI-driven platform; integrated video, KYC with fast delivery.",
+		roleSnippet:
+			"End-to-end development from scratch; architectural leadership, code reviews, sprint planning.",
+		achievementSnippet:
+			"Launched scalable AI-driven platform; integrated video, KYC with fast delivery.",
 		featured: true,
 		keyFeatures: ["Conversational AI search", "Video calls, secure payments, KYC"],
 		role: [
@@ -337,7 +388,8 @@ const projects: PortfolioProject[] = [
 		name: "Badminton Famly+",
 		slug: "badminton_famly",
 		type: "flutter",
-		pitch: "Premium badminton training by Thomas Laybourn — video library, masterclasses, progress tracking.",
+		pitch:
+			"Premium badminton training by Thomas Laybourn — video library, masterclasses, progress tracking.",
 		description:
 			"Premium badminton training platform by champion Thomas Laybourn — extensive video library, masterclasses, custom plan builder, progress tracking, and news.",
 		tech: ["Flutter", "Dart", "GetX", "Dio", "Clean Architecture", "Firebase"],
@@ -346,10 +398,15 @@ const projects: PortfolioProject[] = [
 		urlSecondary: "https://plus.badmintonfamly.com/",
 		linkLabelSecondary: "Website",
 		images: ["badminton.png"],
-		roleSnippet: "Full development at Devcrew I/O; sprint collaboration, API integration, performance optimization.",
+		roleSnippet:
+			"Full development at Devcrew I/O; sprint collaboration, API integration, performance optimization.",
 		achievementSnippet: "Fast, stable, responsive experience; scalable training ecosystem.",
 		featured: true,
-		keyFeatures: ["Personalized training plans", "Offline video access", "Masterclasses & e-learning content"],
+		keyFeatures: [
+			"Personalized training plans",
+			"Offline video access",
+			"Masterclasses & e-learning content",
+		],
 		role: [
 			"Full development at Devcrew I/O",
 			"Sprint collaboration, API integration, performance optimization",
@@ -376,11 +433,24 @@ const projects: PortfolioProject[] = [
 		linkLabel: "Parent app",
 		urlSecondary: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz.owner",
 		linkLabelSecondary: "Owner app",
-		images: ["parent.png", "parent_4.png", "admin.png", "admin_2.png", "teacher.png", "teacher_2.png"],
-		roleSnippet: "Solo ownership: concept → architecture → launch; database/UI/UX design, Play Console.",
-		achievementSnippet: "Record-time delivery of robust, scalable system; production-ready product.",
+		images: [
+			"parent.png",
+			"parent_4.png",
+			"admin.png",
+			"admin_2.png",
+			"teacher.png",
+			"teacher_2.png",
+		],
+		roleSnippet:
+			"Solo ownership: concept → architecture → launch; database/UI/UX design, Play Console.",
+		achievementSnippet:
+			"Record-time delivery of robust, scalable system; production-ready product.",
 		featured: true,
-		keyFeatures: ["Role-specific dashboards", "Real-time attendance & reports", "Fee notifications"],
+		keyFeatures: [
+			"Role-specific dashboards",
+			"Real-time attendance & reports",
+			"Fee notifications",
+		],
 		role: [
 			"Solo ownership: concept → architecture → launch",
 			"Database/UI/UX design, technical client consultancy, Play Console",
@@ -390,9 +460,18 @@ const projects: PortfolioProject[] = [
 			"High-quality, production-ready product",
 		],
 		links: [
-			{ label: "Parent", url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz" },
-			{ label: "Teacher", url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz.teacher" },
-			{ label: "Owner", url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz.owner" },
+			{
+				label: "Parent",
+				url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz",
+			},
+			{
+				label: "Teacher",
+				url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz.teacher",
+			},
+			{
+				label: "Owner",
+				url: "https://play.google.com/store/apps/details?id=com.diaryforhifz.hifz.owner",
+			},
 		],
 	},
 	{
@@ -409,7 +488,8 @@ const projects: PortfolioProject[] = [
 		urlSecondary: "https://www.terragrow.fr/",
 		linkLabelSecondary: "Website",
 		images: ["terragrow.png"],
-		roleSnippet: "Solo development from scratch; UI implementation, REST integration, Play Store launch.",
+		roleSnippet:
+			"Solo development from scratch; UI implementation, REST integration, Play Store launch.",
 		achievementSnippet: "Successful launch with excellent stability; deep Bloc expertise.",
 		featured: false,
 		keyFeatures: ["Plot & financial dashboards", "Compliance utilities"],
@@ -417,13 +497,13 @@ const projects: PortfolioProject[] = [
 			"Solo development from scratch for Amigo",
 			"UI implementation, REST integration, Play Store launch",
 		],
-		achievements: [
-			"Successful launch with excellent stability",
-			"Gained deep Bloc expertise",
-		],
+		achievements: ["Successful launch with excellent stability", "Gained deep Bloc expertise"],
 		links: [
 			{ label: "Website", url: "https://www.terragrow.fr/" },
-			{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.terragrow.farmersapp" },
+			{
+				label: "Play Store",
+				url: "https://play.google.com/store/apps/details?id=com.terragrow.farmersapp",
+			},
 		],
 	},
 	{
@@ -440,7 +520,8 @@ const projects: PortfolioProject[] = [
 		urlSecondary: "https://pioneercdxlabs.com/",
 		linkLabelSecondary: "Website",
 		images: ["prioneer_labs_1.png", "prioneer_labs_2.png"],
-		roleSnippet: "Developed from scratch; UI design, API & Stripe integration, Play Store publication.",
+		roleSnippet:
+			"Developed from scratch; UI design, API & Stripe integration, Play Store publication.",
 		achievementSnippet: "Reliable health booking experience; mastered payment gateway integration.",
 		featured: false,
 		keyFeatures: [
@@ -459,28 +540,32 @@ const projects: PortfolioProject[] = [
 		],
 		links: [
 			{ label: "Website", url: "https://pioneercdxlabs.com/" },
-			{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.pioneercdx.labs" },
+			{
+				label: "Play Store",
+				url: "https://play.google.com/store/apps/details?id=com.pioneercdx.labs",
+			},
 		],
 	},
 ];
 
 /** Shared display order; unlisted projects retain their existing relative order. */
 export const showcasePriority = [
-  "sdrive",
-  "badminton-famly",
-  "twidlee",
-  "hifz-diary",
-  "maxximus",
-  "final-touch",
-  "terragrow",
-  "speedfame-tv",
-  "bbm",
+	"sdrive",
+	"badminton-famly",
+	"twidlee",
+	"hifz-diary",
+	"maxximus",
+	"final-touch",
+	"terragrow",
+	"speedfame-tv",
+	"bbm",
 ] as const;
 
 const showcaseRank = new Map<string, number>(showcasePriority.map((id, index) => [id, index]));
-export const portfolioProjects = [...projects].sort((a, b) =>
-  (showcaseRank.get(a.id) ?? showcasePriority.length) -
-  (showcaseRank.get(b.id) ?? showcasePriority.length)
+export const portfolioProjects = [...projects].sort(
+	(a, b) =>
+		(showcaseRank.get(a.id) ?? showcasePriority.length) -
+		(showcaseRank.get(b.id) ?? showcasePriority.length)
 );
 export const featuredProjects = portfolioProjects.filter((p) => p.featured);
 export const nativeProjects = portfolioProjects.filter((p) => p.type === "native");

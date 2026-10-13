@@ -3,36 +3,120 @@ import EngagementFAQ from '../components/EngagementFAQ.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ProjectInvitation from '../components/ProjectInvitation.astro';
 ---
-<SiteLayout title="Full stack software development services" description="Complete technical delivery across mobile, web, admin panels, backend systems, and cloud deployment. Focused development, software improvements, and technical consulting.">
-  <section class="page-hero"><div class="container">
-    <span class="eyebrow">Software development services</span>
-    <h1>Complete technical delivery.<br />From requirements to deployment.</h1>
-    <p class="lead">You bring the business requirements. I handle the engineering: architecture, implementation, integrations, testing, and deployment.</p>
-  </div></section>
-  <section class="section"><div class="container grid">
-    <article class="card"><span class="number">01 / COMPLETE SOLUTION</span>
-      <h2>Build a complete software solution</h2>
-      <p>Build the connected software your business needs, with technical ownership across its applications and supporting systems.</p>
-      <ul class="list"><li>Technical requirements and architecture</li><li>Mobile apps and web experiences</li><li>Backend systems and administration tools</li><li>Integrations, testing, deployment, and handover</li></ul>
-      <a class="text-link" href="/contact?service=launch">Discuss your software solution →</a>
-    </article>
-    <article class="card"><span class="number">02 / FOCUSED DEVELOPMENT</span>
-      <h2>Develop an app or system</h2>
-      <p>A focused development engagement for a specific application or component, connected to your existing systems.</p>
-      <ul class="list"><li>Flutter and native Android apps</li><li>Websites and administration interfaces</li><li>Backend APIs and business logic</li><li>Third-party and existing-system integrations</li></ul>
-      <a class="text-link" href="/contact?service=platform">Discuss your app or system →</a>
-    </article>
-    <article class="card"><span class="number">03 / EXISTING SOFTWARE</span>
-      <h2>Improve existing software</h2>
-      <p>Extend and maintain the software your business already uses, with hands-on development and technical advice.</p>
-      <ul class="list"><li>New features and integrations</li><li>Performance and architecture improvements</li><li>Maintenance and release support</li><li>Technical feasibility and implementation consulting</li></ul>
-      <a class="text-link" href="/contact?service=improve">Discuss your existing software →</a>
-    </article>
-  </div></section>
-  <section class="section dark"><div class="container split">
-    <div><span class="eyebrow">For complex technical work</span><h2>Define the implementation.<br />Then build.</h2><p class="lead">Technical scoping turns your requirements into an implementation plan. We review the systems, dependencies, and integration constraints before estimating the work.</p></div>
-    <div><h3>Technical scoping deliverables</h3><p class="muted">A defined implementation scope, recommended architecture, integration dependencies, delivery milestones, and an estimate. The scope and any fee for this work are agreed before it begins.</p><a class="button" href="/contact?service=scoping">Discuss technical scoping ↗</a></div>
-  </div></section>
-  <EngagementFAQ /><ProjectInvitation />
+
+<SiteLayout
+	title="Full stack software development services"
+	description="Complete technical delivery across mobile, web, admin panels, backend systems, and cloud deployment. Focused development, software improvements, and technical consulting."
+>
+	<section class="page-hero">
+		<div class="container">
+			<span class="eyebrow">Software development services</span>
+			<h1>
+				Complete technical delivery.
+				<br />
+				From requirements to deployment.
+			</h1>
+			<p class="lead">
+				You bring the business requirements. I handle the engineering: architecture, implementation,
+				integrations, testing, and deployment.
+			</p>
+		</div>
+	</section>
+	<section class="section">
+		<div class="container grid">
+			<article class="card">
+				<span class="number">01 / COMPLETE SOLUTION</span>
+				<h2>Build a complete software solution</h2>
+				<p>
+					Build the connected software your business needs, with technical ownership across its
+					applications and supporting systems.
+				</p>
+				<ul class="list">
+					<li>Technical requirements and architecture</li>
+					<li>Mobile apps and web experiences</li>
+					<li>Backend systems and administration tools</li>
+					<li>Integrations, testing, deployment, and handover</li>
+				</ul>
+				<a class="text-link" href="/contact?service=launch">
+					Discuss your software solution →
+				</a>
+			</article>
+			<article class="card">
+				<span class="number">02 / FOCUSED DEVELOPMENT</span>
+				<h2>Develop an app or system</h2>
+				<p>
+					A focused development engagement for a specific application or component, connected to
+					your existing systems.
+				</p>
+				<ul class="list">
+					<li>Flutter and native Android apps</li>
+					<li>Websites and administration interfaces</li>
+					<li>Backend APIs and business logic</li>
+					<li>Third-party and existing-system integrations</li>
+				</ul>
+				<a class="text-link" href="/contact?service=platform">
+					Discuss your app or system →
+				</a>
+			</article>
+			<article class="card">
+				<span class="number">03 / EXISTING SOFTWARE</span>
+				<h2>Improve existing software</h2>
+				<p>
+					Extend and maintain the software your business already uses, with hands-on development and
+					technical advice.
+				</p>
+				<ul class="list">
+					<li>New features and integrations</li>
+					<li>Performance and architecture improvements</li>
+					<li>Maintenance and release support</li>
+					<li>Technical feasibility and implementation consulting</li>
+				</ul>
+				<a class="text-link" href="/contact?service=improve">
+					Discuss your existing software →
+				</a>
+			</article>
+		</div>
+	</section>
+	<section class="section dark">
+		<div class="container split">
+			<div>
+				<span class="eyebrow">For complex technical work</span>
+				<h2>
+					Define the implementation.
+					<br />
+					Then build.
+				</h2>
+				<p class="lead">
+					Technical scoping turns your requirements into an implementation plan. We review the
+					systems, dependencies, and integration constraints before estimating the work.
+				</p>
+			</div>
+			<div>
+				<h3>Technical scoping deliverables</h3>
+				<p class="muted">
+					A defined implementation scope, recommended architecture, integration dependencies,
+					delivery milestones, and an estimate. The scope and any fee for this work are agreed
+					before it begins.
+				</p>
+				<a class="button" href="/contact?service=scoping">
+					Discuss technical scoping ↗
+				</a>
+			</div>
+		</div>
+	</section>
+	<EngagementFAQ />
+	<ProjectInvitation />
 </SiteLayout>
-<style>.card h2{font-size:1.9rem}.card{display:flex;flex-direction:column}.card .text-link{margin-top:auto;align-self:flex-start}</style>
+<style>
+	.card h2 {
+		font-size: 1.9rem;
+	}
+	.card {
+		display: flex;
+		flex-direction: column;
+	}
+	.card .text-link {
+		margin-top: auto;
+		align-self: flex-start;
+	}
+</style>
