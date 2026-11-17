@@ -1,0 +1,79 @@
+---
+import { getProjectById, getProjectImages } from '../data/portfolio';
+interface Props {
+	compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const project = getProjectById('sdrive')!;
+const preview = getProjectImages(project)[0];
+const caption = project.imageCaptions?.[0] ?? 'SDrive app preview';
+---
+
+<figure class:list={['sdrive-preview', { compact }]}>
+	{preview && (
+		<a
+			href={preview}
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label="View the full SDrive app preview"
+		>
+			<img src={preview} alt={`SDrive — ${caption}`} loading="lazy" decoding="async" />
+			<span class="preview-action" aria-hidden="true">
+				View full preview ↗
+			</span>
+		</a>
+	)}
+	<figcaption>
+		<span class="eyebrow">SDrive / Product preview</span>
+		<p>{caption}</p>
+	</figcaption>
+</figure>
+
+<style>
+	.sdrive-preview {
+		margin: 0;
+		padding: 20px;
+		min-width: 0;
+		border: 1px solid rgba(47, 153, 131, 0.25);
+		border-radius: 14px;
+		background: var(--color-white);
+	}
+	.sdrive-preview a {
+		display: block;
+		position: relative;
+		border-radius: 10px;
+		overflow: hidden;
+		color: var(--color-white);
+	}
+	.sdrive-preview img {
+		width: 100%;
+		height: auto;
+		max-height: 520px;
+		object-fit: contain;
+	}
+	.preview-action {
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		padding: 6px 10px;
+		border-radius: 6px;
+		background: var(--color-navy);
+		font-size: 0.75rem;
+	}
+	figcaption {
+		margin-top: 16px;
+		color: var(--color-navy);
+	}
+	figcaption p {
+		margin: 8px 0 0;
+		font-size: 0.85rem;
+	}
+	.compact img {
+		max-height: 420px;
+	}
+	@media (max-width: 600px) {
+		.sdrive-preview {
+			padding: 14px;
+		}
+	}
+</style>

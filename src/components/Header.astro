@@ -7,17 +7,17 @@
 			<span class="logo-icon">MJ</span>
 			<span class="logo-text">Muhammad Minhaj Nadeem</span>
 		</a>
-		<button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+		<button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
 			<span></span>
 			<span></span>
 			<span></span>
 		</button>
 		<nav class="nav" id="nav-menu">
 			<a href="/" class="nav-link">Home</a>
-			<a href="/#services" class="nav-link">Services</a>
-			<a href="/#about" class="nav-link">About</a>
-			<a href="/portfolio" class="nav-link">Portfolio</a>
-			<a href="/contact" class="nav-link">Contact</a>
+			<a href="/services" class="nav-link">Services</a>
+			<a href="/about" class="nav-link">About</a>
+			<a href="/portfolio" class="nav-link">Work</a>
+			<a href="/contact" class="nav-link">Discuss your project</a>
 		</nav>
 	</div>
 </header>
@@ -30,6 +30,7 @@
 		toggle.addEventListener('click', () => {
 			toggle.classList.toggle('active');
 			nav.classList.toggle('active');
+			toggle.setAttribute('aria-expanded', String(nav.classList.contains('active')));
 		});
 
 		// Close menu when clicking on a link
@@ -38,6 +39,7 @@
 			link.addEventListener('click', () => {
 				toggle.classList.remove('active');
 				nav.classList.remove('active');
+				toggle.setAttribute('aria-expanded', 'false');
 			});
 		});
 	}
@@ -121,7 +123,7 @@
 
 	.nav {
 		display: flex;
-		gap: 2.5rem;
+		gap: 1.5rem;
 		align-items: center;
 	}
 
@@ -138,7 +140,7 @@
 		color: var(--color-teal);
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 1000px) {
 		.header-container {
 			padding: 0 1rem;
 		}
@@ -150,7 +152,8 @@
 		.nav {
 			position: fixed;
 			top: 0;
-			right: -100%;
+			right: 0;
+			display: none;
 			width: 280px;
 			height: 100vh;
 			background: rgba(247, 240, 240, 0.98);
@@ -164,6 +167,7 @@
 		}
 
 		.nav.active {
+			display: flex;
 			right: 0;
 		}
 
