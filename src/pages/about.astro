@@ -6,8 +6,19 @@ import { skillCategories } from '../data/skills';
 ---
 
 <SiteLayout
-	title="About Minhaj — Full Stack Product Engineer"
-	description="Meet Minhaj Nadeem, a Full Stack Product Engineer with eight-plus years in Android and Flutter and experience delivering connected platforms."
+	title="About Minhaj, Flutter & Android Engineer"
+	description="Minhaj Nadeem is a Full Stack Product Engineer with 8+ years in Android and Flutter, delivering connected mobile, web, and backend platforms."
+	ogType="profile"
+	breadcrumbs={[{ name: 'About', path: '/about' }]}
+	schema={[
+		{
+			'@type': 'ProfilePage',
+			'@id': 'https://www.devminhaj.me/about#profilepage',
+			url: 'https://www.devminhaj.me/about',
+			name: 'About Minhaj Nadeem',
+			mainEntity: { '@id': 'https://www.devminhaj.me/#person' },
+		},
+	]}
 >
 	<section class="page-hero">
 		<div class="container">

@@ -6,7 +6,30 @@ const websiteUrl = getProjectById('sdrive')!.url;
 import ProjectInvitation from '../../components/ProjectInvitation.astro';
 ---
 
-<SiteLayout title="SDrive: Complete technical delivery">
+<SiteLayout
+	title="SDrive ride-hailing platform case study"
+	description="A complete ride-hailing platform: rider and driver Flutter apps, marketing site, admin portal, backend, and Google Cloud deployment by Minhaj Nadeem."
+	ogType="article"
+	image="/assets/og/sdrive.png"
+	imageAlt="SDrive ride-hailing platform case study by Minhaj Nadeem"
+	breadcrumbs={[
+		{ name: 'Portfolio', path: '/portfolio' },
+		{ name: 'SDrive', path: '/portfolio/sdrive' },
+	]}
+	schema={[
+		{
+			'@type': 'CreativeWork',
+			'@id': 'https://www.devminhaj.me/portfolio/sdrive#work',
+			name: 'SDrive',
+			description:
+				'A complete ride-hailing platform connecting riders, drivers, and business operations.',
+			url: 'https://www.devminhaj.me/portfolio/sdrive',
+			image: 'https://www.devminhaj.me/assets/og/sdrive.png',
+			author: { '@id': 'https://www.devminhaj.me/#person' },
+			keywords: 'Flutter, Google Cloud, Technical Delivery',
+		},
+	]}
+>
 	<section class="page-hero">
 		<div class="container">
 			<a class="text-link" href="/portfolio">

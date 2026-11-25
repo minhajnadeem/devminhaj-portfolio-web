@@ -7,8 +7,18 @@ const links = enquiryLinks();
 ---
 
 <SiteLayout
-	title="Discuss your project"
-	description="Discuss your app, marketplace, or business platform with Minhaj Nadeem. Direct email and WhatsApp enquiries, with replies within one hour during business hours."
+	title="Hire a Flutter & full stack developer"
+	description="Discuss your app, marketplace, or business platform with Minhaj Nadeem. Email or WhatsApp, with replies within one hour in business hours."
+	breadcrumbs={[{ name: 'Contact', path: '/contact' }]}
+	schema={[
+		{
+			'@type': 'ContactPage',
+			'@id': 'https://www.devminhaj.me/contact#contactpage',
+			url: 'https://www.devminhaj.me/contact',
+			name: 'Contact Minhaj Nadeem',
+			about: { '@id': 'https://www.devminhaj.me/#person' },
+		},
+	]}
 >
 	<section class="page-hero">
 		<div class="container">

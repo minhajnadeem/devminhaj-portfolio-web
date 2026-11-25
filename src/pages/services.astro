@@ -2,11 +2,57 @@
 import EngagementFAQ from '../components/EngagementFAQ.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ProjectInvitation from '../components/ProjectInvitation.astro';
+import { engagementFaq } from '../data/faq';
+const services = [
+	{
+		name: 'Complete software solution',
+		description:
+			'Connected software with technical ownership across requirements, architecture, mobile apps, web experiences, backend systems, administration tools, integrations, testing, deployment, and handover.',
+	},
+	{
+		name: 'Focused app or system development',
+		description:
+			'Flutter and native Android apps, websites and administration interfaces, backend APIs and business logic, and third-party integrations.',
+	},
+	{
+		name: 'Existing software improvement',
+		description:
+			'New features and integrations, performance and architecture improvements, maintenance and release support, and technical consulting for existing software.',
+	},
+];
 ---
 
 <SiteLayout
-	title="Full stack software development services"
-	description="Complete technical delivery across mobile, web, admin panels, backend systems, and cloud deployment. Focused development, software improvements, and technical consulting."
+	title="Mobile, web & backend development services"
+	description="Mobile, web, admin panel, backend, and cloud deployment delivered end to end. Focused development, software improvements, and technical consulting."
+	breadcrumbs={[{ name: 'Services', path: '/services' }]}
+	schema={[
+		{
+			'@type': 'ProfessionalService',
+			'@id': 'https://www.devminhaj.me/services#service',
+			name: 'Minhaj Nadeem — Software development services',
+			url: 'https://www.devminhaj.me/services',
+			founder: { '@id': 'https://www.devminhaj.me/#person' },
+			areaServed: 'Worldwide',
+			serviceType: 'Software development',
+			hasOfferCatalog: {
+				'@type': 'OfferCatalog',
+				name: 'Software development services',
+				itemListElement: services.map((s) => ({
+					'@type': 'Offer',
+					itemOffered: { '@type': 'Service', name: s.name, description: s.description },
+				})),
+			},
+		},
+		{
+			'@type': 'FAQPage',
+			mainEntity: engagementFaq.map((f) => ({
+				'@type': 'Question',
+				name: f.question,
+				acceptedAnswer: { '@type': 'Answer', text: f.answer },
+			})),
+		},
+	]}
 >
 	<section class="page-hero">
 		<div class="container">

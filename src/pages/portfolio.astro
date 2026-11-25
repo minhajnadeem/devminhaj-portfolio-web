@@ -26,8 +26,26 @@ const categories = [
 ---
 
 <SiteLayout
-	title="Apps & business platforms — Work"
-	description="Explore SDrive, Badminton Famly+, Twidlee, Hifz Diary, and more. Case studies explain the business need, Minhaj’s delivery scope, and the software delivered."
+	title="Portfolio: Flutter, Android & web projects"
+	description="Case studies of SDrive, Badminton Famly+, Twidlee, Hifz Diary and more: the business need, Minhaj’s delivery scope, and the software shipped."
+	breadcrumbs={[{ name: 'Portfolio', path: '/portfolio' }]}
+	schema={[
+		{
+			'@type': 'CollectionPage',
+			'@id': 'https://www.devminhaj.me/portfolio#collection',
+			url: 'https://www.devminhaj.me/portfolio',
+			name: 'Portfolio of Minhaj Nadeem',
+			mainEntity: {
+				'@type': 'ItemList',
+				itemListElement: portfolioProjects.map((p, i) => ({
+					'@type': 'ListItem',
+					position: i + 1,
+					name: p.name,
+					url: `https://www.devminhaj.me/portfolio/${p.id}`,
+				})),
+			},
+		},
+	]}
 >
 	<section class="page-hero">
 		<div class="container">
