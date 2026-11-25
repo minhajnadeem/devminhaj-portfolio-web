@@ -14,16 +14,13 @@ Run `npm run seo:audit` before every deploy. It does not check live-site behavio
 
 ## Analytics (item 34)
 
-Privacy-friendly analytics is built in but **off until configured**. It uses Plausible.
+Plausible is enabled in production builds (not in `astro dev`) via the snippet in `src/layouts/SiteLayout.astro`.
 
-1. Create the site in Plausible (cloud, or self-hosted) with domain `devminhaj.me`.
-2. Set at build time on the host:
-   - `PUBLIC_PLAUSIBLE_DOMAIN=devminhaj.me`
-   - `PUBLIC_PLAUSIBLE_SRC=<url>` only if self-hosting.
-3. Contact clicks (email, WhatsApp, Upwork) are sent as a `Contact intent` custom event with `method`, `page`, and `project`/`service` props. In Plausible, add `Contact intent` as a goal.
-4. A click is intent, not a sent enquiry; keep counting real conversations separately (see `LEAD_GENERATION.md`).
+1. Contact clicks (email, WhatsApp, Upwork) are sent as a `Contact intent` custom event with `method`, `page`, and `project`/`service` props. In Plausible, add `Contact intent` as a custom-event goal.
+2. A click is intent, not a sent enquiry; keep counting real conversations separately (see `LEAD_GENERATION.md`).
+3. To change the Plausible site, replace the script ID in `SiteLayout.astro`.
 
-If you prefer GA4 or Umami, the `contact_intent` events are already pushed to `window.dataLayer`.
+If you prefer GA4 or Umami, the `contact_intent` events are also pushed to `window.dataLayer`.
 
 ## One-time setup (needs your accounts)
 
@@ -31,7 +28,7 @@ If you prefer GA4 or Umami, the `contact_intent` events are already pushed to `w
 - [ ] Bing Webmaster Tools: import from Search Console, submit the sitemap.
 - [ ] Host: 301 `devminhaj.me` → `https://www.devminhaj.me`, force HTTPS.
 - [ ] Confirm `public/_headers` is honoured (Netlify / Cloudflare Pages) or port it to the host's format.
-- [ ] Set the analytics env vars above.
+- [ ] Plausible: confirm the site shows incoming pageviews after deploy.
 
 ## Off-site (items 32–33)
 

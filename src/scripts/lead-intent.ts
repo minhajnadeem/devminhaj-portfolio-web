@@ -1,6 +1,6 @@
 // Intent only: a contact-link click does not establish that an enquiry was sent.
 // This script sends nothing itself: it pushes to dataLayer and, only when the optional
-// Plausible snippet is enabled (PUBLIC_PLAUSIBLE_DOMAIN), forwards the intent as a custom event.
+// Plausible snippet is enabled (production builds), forwards the intent as a custom event.
 type LeadIntent = {
 	event: "contact_intent";
 	contact_method: "email" | "whatsapp" | "upwork";
