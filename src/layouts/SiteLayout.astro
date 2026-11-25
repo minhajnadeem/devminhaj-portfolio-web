@@ -7,9 +7,11 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description?: string;
+	noindex?: boolean;
 }
 const {
 	title,
+	noindex = false,
 	description = 'Minhaj is a Full Stack Product Engineer building complete software solutions for businesses: mobile apps, websites, admin panels, backend systems, and cloud deployment.',
 } = Astro.props;
 const pageTitle = `${title} — Minhaj Nadeem`;
@@ -37,7 +39,7 @@ const person = {
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<link rel="canonical" href={canonical} />
+		{noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
 		<title>{pageTitle}</title>
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Minhaj Nadeem" />
