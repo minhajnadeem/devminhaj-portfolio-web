@@ -43,6 +43,11 @@ const image = new URL(imagePath, Astro.site);
 const siteUrl = Astro.site!.href;
 const personId = `${siteUrl}#person`;
 const websiteId = `${siteUrl}#website`;
+// Optional privacy-friendly analytics (Plausible). Set PUBLIC_PLAUSIBLE_DOMAIN (e.g. devminhaj.me)
+// at build time to enable; PUBLIC_PLAUSIBLE_SRC overrides the script URL for self-hosting.
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined;
+const plausibleSrc =
+	(import.meta.env.PUBLIC_PLAUSIBLE_SRC as string | undefined) ?? 'https://plausible.io/js/script.js';
 const abs = (path: string) => new URL(path, Astro.site).href;
 
 const person = {
@@ -124,6 +129,18 @@ const graph = {
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={image} />
 		<meta name="twitter:image:alt" content={imageAlt} />
+		{plausibleDomain && (
+			<>
+				<script is:inline defer data-domain={plausibleDomain} src={plausibleSrc} />
+				<script is:inline>
+					window.plausible =
+						window.plausible ||
+						function () {
+							(window.plausible.q = window.plausible.q || []).push(arguments);
+						};
+				</script>
+			</>
+		)}
 		<script type="application/ld+json" set:html={JSON.stringify(graph).replace(/</g, '\\u003c')} />
 	</head>
 	<body>

@@ -1,5 +1,6 @@
 // Intent only: a contact-link click does not establish that an enquiry was sent.
-// No analytics provider or network request is configured here.
+// This script sends nothing itself: it pushes to dataLayer and, only when the optional
+// Plausible snippet is enabled (PUBLIC_PLAUSIBLE_DOMAIN), forwards the intent as a custom event.
 type LeadIntent = {
 	event: "contact_intent";
 	contact_method: "email" | "whatsapp" | "upwork";
@@ -7,7 +8,10 @@ type LeadIntent = {
 	project_context?: string;
 	service_context?: string;
 };
-type AnalyticsWindow = Window & { dataLayer?: unknown[] };
+type AnalyticsWindow = Window & {
+	dataLayer?: unknown[];
+	plausible?: (event: string, options?: { props?: Record<string, string> }) => void;
+};
 
 document.addEventListener("click", (event) => {
 	if (!(event.target instanceof Element)) return;
@@ -33,5 +37,13 @@ document.addEventListener("click", (event) => {
 	};
 	const targetWindow = window as AnalyticsWindow;
 	(targetWindow.dataLayer ??= []).push(detail);
+	targetWindow.plausible?.("Contact intent", {
+		props: {
+			method,
+			page: detail.page_path,
+			...(detail.project_context ? { project: detail.project_context } : {}),
+			...(detail.service_context ? { service: detail.service_context } : {}),
+		},
+	});
 	window.dispatchEvent(new CustomEvent("portfolio:contact-intent", { detail }));
 });
